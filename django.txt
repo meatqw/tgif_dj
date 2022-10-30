@@ -1,0 +1,7 @@
+django-admin startproject app
+
+# run
+python manage.py runserver
+
+# create app
+python manage.py startapp main
