@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TGIF</title>
+  <link rel="stylesheet" href="{% static 'main/css/style.min.css' %}">
+</head>
+
+<body class="body">
+
+
+  <main class="main">
+
+    <section class="entry">
+      <form action='/entry' method='post' class="entry__inner">
+        {% csrf_token %}
+
+        
+        <div class="entry__logo">
+          <img class="entry__logo-img" width="147" height="54" src="{% static 'main/images/logo.svg' %}" alt="logo">
+        </div>
+        <input name="token" class="entry__input" type="text" placeholder="Ввести инвайт">
+        <button class="entry__btn" type="submit">
+          Войти
+        </button>
+      </form>
+    </section>
+
+  </main>
+
+
+  <script src="{% static 'main/js/main.min.js' %}"></script>
+</body>
+
+</html>

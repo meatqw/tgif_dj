@@ -1,0 +1,92 @@
+
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="content__main">
+  <div class="faq">
+    <h1 class="faq__title">faq</h1>
+    <div class="faq__inner">
+      <div class="faq__left">
+        <div class="faq__item-inner">
+          <div class="faq__item-title">Правила поведения на сайте</div>
+          <ol class="faq__list">
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайтеПримерный текст
+              на сайте
+            </li>
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайте
+            </li>
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайте
+            </li>
+          </ol>
+        </div>
+
+        <div class="faq__item-inner">
+          <div class="faq__item-title">Инструкция</div>
+          <ol class="faq__list">
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайтеПримерный текст
+              на сайте
+            </li>
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайте
+            </li>
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайте
+            </li>
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайтеПримерный текст
+              на сайте
+            </li>
+            <li class="faq__item">
+              Примерный текст на сайте Примерный текст на сайтеПримерный текст
+              на сайте
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="faq__right">
+        <form class="feedback">
+          <div class="feedback__title">Задайте вопрос</div>
+          <div class="feedback__text">
+            Остались вопросы? Мы рады будем ответить!
+          </div>
+          <div class="feedback__input-wrap">
+            <label class="feedback__label" for="email-input"> Ваш email </label>
+            <input
+              class="feedback__input"
+              id="email-input"
+              placeholder="Ваш email"
+              type="email"
+            />
+          </div>
+          <div class="feedback__input-wrap">
+            <label class="feedback__label" for="quest-input">
+              Ваш вопрос
+            </label>
+            <textarea
+              class="feedback__input feedback__textarea"
+              id="quest-input"
+              placeholder="Ваш вопрос"
+            ></textarea>
+          </div>
+          <div class="feedback__input-wrap">
+            <input
+              class="feedback__checkbox"
+              type="checkbox"
+              id="feedback-check"
+            />
+            <label class="feedback__checkbox-label" for="feedback-check">
+              Даю согласие на <a href="#">обработку персональных данных</a>
+            </label>
+          </div>
+          <button class="feedback__btn" type="submit">Отправить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

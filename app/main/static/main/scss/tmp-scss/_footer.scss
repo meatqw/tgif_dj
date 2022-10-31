@@ -1,0 +1,138 @@
+.footer {
+  margin-top: auto;
+  background-color: #1D222B;
+  padding: 40px 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #AAC2FF;
+
+  @include adpt ($bmob-r) {
+    padding: 25px 0;
+  }
+
+  &__container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+    @include adpt ($stab-r) {
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__social-wrap {
+    flex: 1;
+
+    @include adpt ($stab-r) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__tel-wrap {
+    flex: 1;
+    text-align: right;
+  }
+
+  &__nav-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    @include adpt ($stab-r) {
+      order: -1;
+      margin-bottom: 65px;
+      width: 100%;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+
+    @include adpt ($stab-r) {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  &__nav-item {
+    @include adpt ($stab-r) {
+      width: 100%;
+    }
+
+    &:not(:last-child) {
+      margin-right: 30px;
+
+      @include adpt ($tab-r) {
+        margin-right: 15px;
+      }
+
+      @include adpt ($stab-r) {
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  &__nav-link {
+    font-weight: 500;
+    font-size: 14px;
+
+    @include adpt ($stab-r) {
+      text-align: center;
+      width: 100%;
+    }
+
+    &:hover {
+      color: $blue-light;
+    }
+  }
+
+  &__tel {
+    font-size: 18px;
+    font-weight: 700;
+
+    @include adpt ($tab-r) {
+      font-size: 16px;
+    }
+
+    @include adpt ($stab-r) {
+      font-size: 18px;
+    }
+
+    &:hover {
+      color: $blue-light;
+    }
+  }
+
+  &__bottom {
+    text-align: center;
+  }
+
+  &__info {
+    font-size: 12px;
+    max-width: 440px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+
+    @include adpt ($bmob-r) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__copyright {
+    font-size: 10px;
+
+    @include adpt ($stab-r) {
+      opacity: 0.8;
+    }
+  }
+}

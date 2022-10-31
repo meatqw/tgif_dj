@@ -1,0 +1,250 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TGIF</title>
+    <link rel="stylesheet" href="{% static 'main/css/style.min.css' %}" />
+  </head>
+
+  <body class="body">
+    <main class="main">
+      <div class="main__inner">
+        <div class="menu">
+          <nav class="menu__inner">
+            <div class="menu__top">
+              <div class="menu__top-left">
+                <button
+                  class="burger content__burger _show-1024 js-menu-toggle"
+                >
+                  <img
+                    class="burger__img"
+                    src="{% static 'main/images/icon/menu-close.svg' %}"
+                    alt="menu-toggle"
+                  />
+                  <span class="sr-only"> Открыть меню </span>
+                </button>
+
+                <a class="menu__logo logo" href="#">
+                  <img
+                    class="logo img"
+                    src="{% static 'main/images/logo.svg' %}"
+                    alt="logo"
+                  />
+                </a>
+              </div>
+
+              <div class="content__exit-wrap _show-1024">
+                <button class="content__exit" type="button" onclick="window.location.replace('/logout');">
+                  <img
+                    class="content__exit-img"
+                    width="30"
+                    height="30"
+                    src="{% static 'main/images/icon/exit.svg' %}"
+                    alt="exit"
+                  />
+                  <span class="sr-only"> Выйти из личного кабинета </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="balance">
+              <div class="balance__top">
+                <div class="balance__text">
+                  <span class="balance__text-text balance__text-text_first">
+                    Баланс
+                  </span>
+                  <span class="balance__balance"> {{ user.balance }} </span>
+                  <span class="balance__text-text"> RUB </span>
+                </div>
+                <button class="balance__btn js-toggle-balance">
+                  <span class="sr-only"> Посмотреть реквизит </span>
+                </button>
+              </div>
+
+              <div class="balance__bottom">
+                <div class="balance__input-wrap">
+                  <input
+                    class="balance__input"
+                    disabled
+                    type="text"
+                    value="7583958399294638"
+                  />
+                  <button class="balance__copy" type="button">
+                    <img
+                      class="balance__img"
+                      src="{% static 'main/images/icon/copy.svg' %}"
+                      alt="copy"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <ul class="menu__list">
+              <li class="menu__item">
+                {% url 'news' as url %}
+                <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'news' %}"> Новости </a>
+              </li>
+              <li class="menu__item">
+                {% url 'index' as url %}
+                <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'index' %}"> Продажа </a>
+              </li>
+              <li class="menu__item">
+                {% url 'request' as url %}
+                <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'request' %}"> Заявки </a>
+              </li>
+              <li class="menu__item">
+                {% url 'wallets' as url %}
+                <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'wallets' %}"> Кошельки </a>
+              </li>
+              <li class="menu__item">
+                {% url 'faq' as url %}
+                <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'faq' %}"> FAQ </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="content">
+          <div class="content__top">
+            <div class="content__left">
+              <button class="burger content__burger _show-1024 js-menu-toggle">
+                <img
+                  class="burger__img"
+                  src="{% static 'main/images/icon/menu.svg' %}"
+                  alt="menu-toggle"
+                />
+                <span class="sr-only"> Открыть меню </span>
+              </button>
+              <a class="logo _show-1024" href="/">
+                <img
+                  class="logo img"
+                  src="{% static 'main/images/logo.svg' %}"
+                  alt="logo"
+                />
+              </a>
+            </div>
+
+            <button class="content__exit" type="button" onclick="window.location.replace('/logout');">
+              <img
+                class="content__exit-img"
+                width="30"
+                height="30"
+                src="{% static 'main/images/icon/exit.svg' %}"
+                alt="exit"
+              />
+              <span class="sr-only"> Выйти из личного кабинета </span>
+            </button>
+          </div>
+
+          <div class="content__main">
+            <div class="content__items">
+              <div class="content__item content__item_1">
+                <div class="content__item-top">Счёт-эскроу</div>
+                <div class="content__item-bottom">
+                  {{ user.escrow }}
+                  <span>RUB</span>
+                </div>
+              </div>
+              <div class="content__item content__item_2">
+                <div class="content__item-top">Выполнено заявок</div>
+                <div class="content__item-bottom">{{ user.requests }}</div>
+              </div>
+              <div class="content__item content__item_3">
+                <div class="content__item-top">Получено</div>
+                <div class="content__item-bottom">
+                  {{ user.received }}
+                  <span>RUB</span>
+                </div>
+              </div>
+            </div>
+          
+
+          {% block content %}{% endblock %}
+
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__top">
+          <div class="footer__social-wrap">
+            <ul class="footer__social social">
+              <li class="social__item">
+                <a class="social__link" href="#">
+                  <img
+                    class="social__img"
+                    src="{% static 'main/images/social/1.svg' %}"
+                    alt="social"
+                  />
+                </a>
+              </li>
+              <li class="social__item">
+                <a class="social__link" href="#">
+                  <img
+                    class="social__img"
+                    src="{% static 'main/images/social/1.svg' %}"
+                    alt="social"
+                  />
+                </a>
+              </li>
+              <li class="social__item">
+                <a class="social__link" href="#">
+                  <img
+                    class="social__img"
+                    src="{% static 'main/images/social/1.svg' %}"
+                    alt="social"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer__nav-wrap">
+            <ul class="footer__nav">
+              <li class="footer__nav-item">
+                <a class="footer__nav-link" href="#"> Баланс </a>
+              </li>
+              <li class="footer__nav-item">
+                <a class="footer__nav-link" href="{% url 'news' %}"> Новости </a>
+              </li>
+              <li class="footer__nav-item">
+                <a class="footer__nav-link" href="{% url 'index' %}"> Продажи </a>
+              </li>
+              <li class="footer__nav-item">
+                <a class="footer__nav-link" href="{% url 'request' %}"> Завяки </a>
+              </li>
+              <li class="footer__nav-item">
+                <a class="footer__nav-link" href="{% url 'wallets' %}"> Кошелёк </a>
+              </li>
+              <li class="footer__nav-item">
+                <a class="footer__nav-link" href="{% url 'faq' %}"> FAQ </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer__tel-wrap">
+            <a class="footer__tel" href="tel:+375331234567">
+              +375 (33) 123-45-67
+            </a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__info">
+            Время работы, адрес или другая полезная информация. Время работы,
+            адрес или другая полезная информация
+          </p>
+          <p class="footer__copyright">@ Все права защищены</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'main/js/main.min.js' %}"></script>
+  </body>
+</html>

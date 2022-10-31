@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+  <section class="news">
+    <h1 class="news__title">Наши новости</h1>
+    <div class="news__slider js-news-slider">
+      {% for item in news %}
+      <div class="news__slide-wrap">
+        <a class="news__slide" href="/news/{{ item.id }}">
+          <img class="news__img" src="{{ item.img.url }}" alt="news" />
+          <div class="news__content">
+            <div class="news__item-title">{{ item.title}}</div>
+            <div class="news__text">{{ item.description }}</div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% endblock %}

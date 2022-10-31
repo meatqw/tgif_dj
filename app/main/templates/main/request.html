@@ -1,0 +1,48 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+  <section class="request">
+    <h1 class="request__title title">Заявки</h1>
+    <div class="request__inner">
+      <div class="table">
+        <table class="table__inner">
+          <caption>
+            <div class="table__top">
+              <div class="table__top-btn">Заявки</div>
+            </div>
+          </caption>
+          <tbody>
+            <tr>
+              <th>Номер</th>
+              <th>Сумма</th>
+              <th>Истекает через</th>
+              <th>Действие</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>121421</td>
+              <td>2</td>
+              <td>
+                <a class="table__get js-popup--link" href="#request-pop-up"
+                  >Принять</a
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>1214241121</td>
+              <td>24</td>
+              <td>
+                <a class="table__get js-popup--link" href="#request-pop-up"
+                  >Принять</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,353 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.2;
+  background-color: #212834;
+  color: $def-text;
+  overflow-x: hidden;
+}
+
+
+.sr-only {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.main {
+  flex: 1;
+
+  &__inner {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+
+    @include adpt ($tab-r) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.logo {
+  width: 100%;
+  max-width: 65px;
+
+  &__img {
+    width: 100%;
+    object-fit: contain;
+  }
+}
+
+.content {
+  padding: 50px 50px;
+  min-width: 0;
+  background: linear-gradient(180deg, #425073 0%, rgba(33, 40, 52, 0.45) 100%), #212834;
+
+  @include adpt ($big-r) {
+    padding: 50px 25px;
+  }
+
+  @include adpt ($tab-r) {
+    padding: 25px 25px 50px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  &__exit {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 0.3px solid #A2B2D9;
+    box-shadow: 0px 4px 20px 7px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 2px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+
+    @include adpt ($tab-r) {
+      width: 40px;
+      height: 40px;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &__exit-img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+
+    @include adpt ($tab-r) {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 19px;
+    margin: 0 80px 90px;
+
+    @include adpt ($big-r) {
+      margin: 0 0 70px;
+    }
+
+    @include adpt ($stab-r) {
+      grid-template-columns: 1fr;
+      grid-gap: 15px;
+    }
+  }
+
+  &__item {
+    backdrop-filter: blur(4.5px);
+    border-radius: 5px;
+    box-shadow: 0px 4px 20px 7px rgba(0, 0, 0, 0.3);
+    padding: 25px 25px 50px;
+
+    @include adpt ($big-r) {
+      padding: 20px 20px 40px;
+    }
+
+    @include adpt ($stab-r) {
+      padding: 15px;
+    }
+
+    @include adpt ($bmob-r) {
+      padding: 12px 10px;
+    }
+
+    &_1 {
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), rgba(101, 252, 242, 0.04);
+      border: 1px solid #65FCF2;
+
+      & .content__item-top {
+        border-bottom: 1px solid #65FCF2;
+      }
+    }
+
+    &_2 {
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), rgba(198, 199, 200, 0.04);
+      border: 1px solid #C6C7C8;
+
+      & .content__item-top {
+        border-bottom: 1px solid #C6C7C8;
+      }
+    }
+
+    &_3 {
+      background: linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), rgba(255, 199, 239, 0.04);
+      border: 1px solid #FFC7EF;
+
+      & .content__item-top {
+        border-bottom: 1px solid #FFC7EF;
+      }
+    }
+  }
+
+  &__item-top {
+    font-size: 23px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    margin-bottom: 22px;
+
+    @include adpt ($big-r) {
+      font-size: 19px;
+    }
+
+    @include adpt ($stab-r) {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 16px;
+    }
+  }
+
+  &__item-bottom {
+    font-size: 39px;
+
+    @include adpt ($big-r) {
+      font-size: 22px;
+    }
+
+    @include adpt ($stab-r) {
+      font-size: 20px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 25px;
+    }
+
+    & span {
+      font-size: 20px;
+
+      @include adpt ($big-r) {
+        font-size: 16px;
+      }
+
+      @include adpt ($stab-r) {
+        font-size: 14px;
+      }
+
+      @include adpt ($bmob-r) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__burger {
+    margin-right: 20px;
+
+    @include adpt ($bmob-r) {
+      margin-right: 15px;
+    }
+  }
+}
+
+.burger {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__img {
+    width: 32px;
+    height: 21px;
+    object-fit: contain;
+  }
+}
+
+._show-1024 {
+  display: none;
+
+  @include adpt ($tab-r) {
+    display: block;
+  }
+}
+
+._fixed {
+  overflow: hidden;
+}
+
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(9, 31, 58, 0.876);
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.5s ease;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  &__body {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 40px;
+
+    @include adpt ($bmob-r) {
+      padding: 20px 15px;
+    }
+  }
+
+  &__title {
+    font-size: 22px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  &__content {
+    position: relative;
+    max-width: 960px;
+    width: 100%;
+    background-color: #212834;
+    border-radius: 4px;
+    padding: 68px;
+
+
+    @include adpt ($bmob-r) {
+      padding: 60px 10px 16px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    right: 45px;
+    top: 20px;
+    background-image: url('../images/icon/close.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    @include adpt ($bmob-r) {
+      right: 20px;
+    }
+  }
+
+  &__inner {
+    max-width: 330px;
+    margin: 0 auto;
+
+  }
+
+}
+
+.title {
+  font-weight: 500;
+  color: $blue-light;
+  font-size: 30px;
+  margin-bottom: 50px;
+
+  @include adpt ($stab-r) {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  @include adpt ($bmob-r) {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,129 @@
+.balance {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), rgba(71, 162, 159, 0.3);
+  border: 1px solid #47A29F;
+  box-shadow: 0px 4px 20px 7px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  padding: 20px 17px;
+  color: $blue-light;
+  margin-bottom: 50px;
+
+  @include adpt ($big-r) {
+    padding: 15px;
+    margin-bottom: 30px;
+  }
+
+  &__bottom {
+    display: none;
+    margin-top: 17px;
+  }
+
+  &__text-text {
+    font-size: 14px;
+
+    &_first {
+      position: relative;
+      padding-right: 8px;
+      margin-right: 8px;
+      font-size: 17px;
+
+      &::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        width: 1px;
+        height: 10px;
+        background-color: $blue-light;
+      }
+    }
+  }
+
+  &__balance {
+    font-size: 22px;
+    font-weight: 300;
+
+    @include adpt ($bmob-r) {
+      font-size: 20px;
+    }
+  }
+
+  &__input-wrap {
+    position: relative;
+  }
+
+  &__input {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), rgba(71, 162, 159, 0.3);
+    border: 1px solid #47A29F;
+    border-radius: 5px;
+    padding: 4px 30px 4px 10px;
+    width: 100%;
+    font-size: 14px;
+  }
+
+  &__copy {
+    position: absolute;
+    right: 5px;
+    height: 100%;
+    padding: 0 5px;
+    top: 0;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    position: relative;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(199, 224, 223, 0.2);
+    border: 1px solid #A2B2D9;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: rotate(45deg);
+
+      @include adpt ($bmob-r) {
+        transform: rotate(0);
+      }
+    }
+
+    &._active {
+      &::before {
+        opacity: 0;
+      }
+
+      &:hover {
+        transform: rotate(0);
+      }
+    }
+
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 2px;
+      background-color: #A2B2D9;
+    }
+
+    &::after {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &::before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+      transition: opacity 0.3s;
+    }
+  }
+}

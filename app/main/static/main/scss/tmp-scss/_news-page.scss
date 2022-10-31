@@ -1,0 +1,37 @@
+.news-page {
+  max-width: 1000px;
+
+  & h1 {
+    text-transform: uppercase;
+    color: $blue-light;
+    font-size: 30px;
+    margin-bottom: 50px;
+
+    @include adpt ($stab-r) {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 20px;
+    }
+  }
+
+  & img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920/1080;
+    margin: 0 auto 40px;
+    object-fit: cover;
+  }
+
+  & p {
+    @include adpt ($bmob-r) {
+      font-size: 15px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+}

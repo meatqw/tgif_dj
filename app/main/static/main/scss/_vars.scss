@@ -1,0 +1,40 @@
+$default:#0B0C10;
+$white: #ffffff;
+$blue: #212834;
+$gray: #C6C7C8;
+$blue-light: #A2B2D9;
+$def-text: #C8D8FF;
+
+
+
+$big-r: 1380;
+$desm-r: 1280;
+$tab-r: 1024;
+$mtab-r: 992;
+$stab-r: 768;
+$bmob-r: 576;
+
+
+
+
+@mixin adpt($width) {
+  @media (max-width: #{$width}px) {
+    @content;
+  }
+}
+
+@mixin adptmob($width) {
+  @media (min-width: #{$width}px) {
+    @content;
+  }
+}
+
+@include adpt ($bmob-r) {}
+
+@function max($numbers...) {
+  @return m#{a}x(#{$numbers});
+}
+
+@function min($numbers...) {
+  @return m#{i}n(#{$numbers});
+}

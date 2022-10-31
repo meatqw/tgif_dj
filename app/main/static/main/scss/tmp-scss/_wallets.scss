@@ -1,0 +1,21 @@
+.wallets {
+  &__inner {
+    overflow-x: auto;
+    max-width: 750px;
+    padding-bottom: 80px;
+  }
+
+  & table {
+
+    & th,
+    & td {
+      &:first-child {
+        width: 90px;
+
+        @include adpt ($bmob-r) {
+          width: 70px;
+        }
+      }
+    }
+  }
+}

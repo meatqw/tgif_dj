@@ -1,0 +1,135 @@
+.news {
+  padding: 0 80px;
+
+  @include adpt ($big-r) {
+    padding: 0;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 33px;
+    color: $blue-light;
+    margin-bottom: 30px;
+
+    @include adpt ($big-r) {
+      font-size: 25px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 22px;
+    }
+
+  }
+
+  &__slide-wrap {
+    padding: 0 8px;
+    height: 100%;
+  }
+
+  &__slider {
+    margin: 0 -8px;
+
+    @include adpt ($big-r) {
+      padding: 0 40px;
+    }
+
+    @include adpt ($bmob-r) {
+      padding: 0 20px;
+    }
+  }
+
+  &__slide {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px 12px 20px;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)), rgba(200, 216, 255, 0.8);
+    border-radius: 5px;
+    color: $default;
+
+    @include adpt ($bmob-r) {
+      padding: 7px 6px 15px;
+    }
+
+  }
+
+  &__img {
+    aspect-ratio: 415/185;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+  }
+
+  &__item-title {
+    font-size: 19px;
+    margin-bottom: 8px;
+
+    @include adpt ($big-r) {
+      font-size: 18px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 17px;
+    }
+  }
+
+  &__text {
+    font-size: 17px;
+    opacity: 0.8;
+
+    @include adpt ($bmob-r) {
+      font-size: 15px;
+    }
+  }
+
+
+
+  & .slick-track {
+    margin-left: 0;
+    display: flex;
+  }
+
+  & .slick-slide {
+    height: inherit !important;
+
+    &>div {
+      height: 100%;
+    }
+  }
+
+  & .slick-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0;
+    height: 40px;
+    width: 25px;
+    background-image: url('../images/icon/arrow-left.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    @include adpt ($stab-r) {
+      height: 30px;
+      width: 18px;
+    }
+  }
+
+  & .slick-prev {
+    left: -65px;
+
+    @include adpt ($big-r) {
+      left: 0;
+    }
+  }
+
+  & .slick-next {
+    right: -65px;
+    transform: translateY(-50%) rotate(180deg);
+
+    @include adpt ($big-r) {
+      right: 0;
+    }
+  }
+}
