@@ -28,7 +28,7 @@
                   <span class="sr-only"> Открыть меню </span>
                 </button>
 
-                <a class="menu__logo logo" href="#">
+                <a class="menu__logo logo" href="/">
                   <img
                     class="logo img"
                     src="{% static 'main/images/logo.svg' %}"
@@ -94,8 +94,8 @@
                 <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'index' %}"> Продажа </a>
               </li>
               <li class="menu__item">
-                {% url 'request' as url %}
-                <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'request' %}"> Заявки </a>
+                {% url 'req' as url %}
+                <a class="menu__link {% if request.path == url %}_active{%endif %}" href="{% url 'req' %}"> Заявки </a>
               </li>
               <li class="menu__item">
                 {% url 'wallets' as url %}
@@ -218,7 +218,7 @@
                 <a class="footer__nav-link" href="{% url 'index' %}"> Продажи </a>
               </li>
               <li class="footer__nav-item">
-                <a class="footer__nav-link" href="{% url 'request' %}"> Завяки </a>
+                <a class="footer__nav-link" href="{% url 'req' %}"> Завяки </a>
               </li>
               <li class="footer__nav-item">
                 <a class="footer__nav-link" href="{% url 'wallets' %}"> Кошелёк </a>

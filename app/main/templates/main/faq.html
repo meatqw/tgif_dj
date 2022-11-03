@@ -48,7 +48,8 @@
         </div>
       </div>
       <div class="faq__right">
-        <form class="feedback">
+        <form class="feedback" action="/faq" method="post">
+          {% csrf_token %}
           <div class="feedback__title">Задайте вопрос</div>
           <div class="feedback__text">
             Остались вопросы? Мы рады будем ответить!
@@ -60,6 +61,7 @@
               id="email-input"
               placeholder="Ваш email"
               type="email"
+              name="email"
             />
           </div>
           <div class="feedback__input-wrap">
@@ -70,6 +72,7 @@
               class="feedback__input feedback__textarea"
               id="quest-input"
               placeholder="Ваш вопрос"
+              name="question"
             ></textarea>
           </div>
           <div class="feedback__input-wrap">

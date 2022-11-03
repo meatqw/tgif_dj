@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="content__main">
-  
+
 
   <section class="wallets">
     <h1 class="wallets__title title">Мой кошелёк</h1>
@@ -17,23 +17,10 @@
               </div>
               <div class="table__top-right">
                 <button class="table__btn-add">
-                  <svg
-                    width="36"
-                    height="35"
-                    viewBox="0 0 36 35"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="17.7796"
-                      cy="17.4139"
-                      r="16.8626"
-                      stroke="#A2B2D9"
-                    />
-                    <path
-                      d="M17.7802 9.77441V18.1085M17.7802 26.4425V18.1085M17.7802 18.1085H26.1142H10.1406"
-                      stroke="#A2B2D9"
-                    />
+                  <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="17.7796" cy="17.4139" r="16.8626" stroke="#A2B2D9" />
+                    <path d="M17.7802 9.77441V18.1085M17.7802 26.4425V18.1085M17.7802 18.1085H26.1142H10.1406"
+                      stroke="#A2B2D9" />
                   </svg>
                 </button>
               </div>
@@ -45,6 +32,7 @@
               <th>Реквизит</th>
               <th>Действие</th>
             </tr>
+            {% for wallet in wallets %}
             <tr>
               <td>
                 <div class="table__check-wrap">
@@ -52,22 +40,13 @@
                   <label class="table__check-label" for="tb-rq-1"> </label>
                 </div>
               </td>
-              <td>121421</td>
+              <td>{{ wallet.props }}</td>
               <td>
                 <div class="table__option">
                   <div class="table__option-top js-table-option">
                     <span class="table__option-text"> Действия </span>
-                    <svg
-                      width="17"
-                      height="8"
-                      viewBox="0 0 17 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M16.2529 0.171875H0.279297L8.61334 7.11691L16.2529 0.171875Z"
-                        fill="#A2B2D9"
-                      />
+                    <svg width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M16.2529 0.171875H0.279297L8.61334 7.11691L16.2529 0.171875Z" fill="#A2B2D9" />
                     </svg>
                   </div>
                   <ul class="table__sublist">
@@ -85,50 +64,13 @@
                 </div>
               </td>
             </tr>
-            <tr>
-              <td>
-                <div class="table__check-wrap">
-                  <input class="table__checkbox" type="checkbox" id="tb-rq-2" />
-                  <label class="table__check-label" for="tb-rq-2"> </label>
-                </div>
-              </td>
-              <td>121421</td>
-              <td>
-                <div class="table__option">
-                  <div class="table__option-top js-table-option">
-                    <span class="table__option-text"> Действия </span>
-                    <svg
-                      width="17"
-                      height="8"
-                      viewBox="0 0 17 8"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M16.2529 0.171875H0.279297L8.61334 7.11691L16.2529 0.171875Z"
-                        fill="#A2B2D9"
-                      />
-                    </svg>
-                  </div>
-                  <ul class="table__sublist">
-                    <li class="table__sub-item">
-                      <button class="table__sub-btn js-close-option">
-                        Изменить
-                      </button>
-                    </li>
-                    <li class="table__sub-item">
-                      <button class="table__sub-btn js-close-option">
-                        Удалить
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
   </section>
 </div>
+
+
 {% endblock %}

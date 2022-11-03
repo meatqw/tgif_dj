@@ -19,30 +19,24 @@
               <th>Истекает через</th>
               <th>Действие</th>
             </tr>
+
+            {% for item in req %}
             <tr>
-              <td>1</td>
-              <td>121421</td>
-              <td>2</td>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.lifespan }}</td>
               <td>
                 <a class="table__get js-popup--link" href="#request-pop-up"
                   >Принять</a
                 >
               </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>1214241121</td>
-              <td>24</td>
-              <td>
-                <a class="table__get js-popup--link" href="#request-pop-up"
-                  >Принять</a
-                >
-              </td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
     </div>
   </section>
 </div>
+{% include 'main/popup.html' %}
 {% endblock %}

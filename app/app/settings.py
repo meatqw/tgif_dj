@@ -137,6 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL='/entry'
 LOGIN_REDIRECT_URL='/'
 
+
+# add custom backend methods
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'main.authentication.UserBackend',
