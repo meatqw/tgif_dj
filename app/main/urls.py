@@ -12,7 +12,9 @@ urlpatterns = [
     path('news/<int:id>', views.news_page, name='news_page'),
     path('req', views.req, name='req'),
     path('wallets', views.wallets,  name='wallets'),
+    path('wallets/<int:id>', views.del_wallet,  name='delWallets'),
     path('accounts/login', views.index, name='login'),
+    path('getWallets', views.get_wallets, name='getWallets'),
     path('logout', views.logout_, name='logout')
 
 ] + static(settings.MEDIA_ROOT, document_root=settings.MEDIA_ROOT)

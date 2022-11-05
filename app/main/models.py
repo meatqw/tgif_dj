@@ -67,14 +67,26 @@ class Wallets(models.Model):
     class Meta:
         verbose_name = 'Кошелёк'
         verbose_name_plural = 'Кошельки'
-
+        
+class Status(models.Model):
+    '''status for requests'''
+    status_name = models.CharField('status', max_length=50)
+    datetime = models.DateTimeField(auto_now_add=True, blank=True)
+    
+    def __str__(self):
+        return self.status_name
+    
 
 class Request(models.Model):
     '''Request model'''
     amount = models.CharField('amount', max_length=50)
     lifespan = models.IntegerField('lifespan')
-    user = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
+    status = models.ForeignKey(Status, on_delete=models.PROTECT, null=False)
+    condition = models.BooleanField('condition', default=False)
+    wallets = models.JSONField('Wallets', default='{}')
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
+    
 
     def __str__(self):
         return self.amount

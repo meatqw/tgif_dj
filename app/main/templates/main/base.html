@@ -72,8 +72,9 @@
                     disabled
                     type="text"
                     value="7583958399294638"
+                    id='copy'
                   />
-                  <button class="balance__copy" type="button">
+                  <button class="balance__copy" onclick="copyEvent('copy')" type="button">
                     <img
                       class="balance__img"
                       src="{% static 'main/images/icon/copy.svg' %}"
@@ -83,6 +84,8 @@
                 </div>
               </div>
             </div>
+
+            
 
             <ul class="menu__list">
               <li class="menu__item">
@@ -247,4 +250,12 @@
 
     <script src="{% static 'main/js/main.min.js' %}"></script>
   </body>
+  <script>
+    function copyEvent(id)
+    {
+        var str = document.getElementById(id);
+        window.getSelection().selectAllChildren(str);
+        document.execCommand("Copy")
+    }
+</script>
 </html>

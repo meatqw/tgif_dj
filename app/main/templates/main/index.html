@@ -11,17 +11,17 @@
               <div class="table__top-left">
                 <button
                   class="table__top-btn js-table-btn _active"
-                  type="button"
+                  type="button" id='in_active_btn'
                 >
                   Активные заявки
                 </button>
-                <button class="table__top-btn js-table-btn" type="button">
+                <button class="table__top-btn js-table-btn" type="button" id='in_check_btn'>
                   На проверке
                 </button>
-                <button class="table__top-btn js-table-btn" type="button">
+                <button class="table__top-btn js-table-btn" type="button" id='closed_btn'>
                   Завершенные
                 </button>
-                <button class="table__top-btn js-table-btn" type="button">
+                <button class="table__top-btn js-table-btn" type="button" id='all_btn'>
                   Все
                 </button>
               </div>
@@ -52,7 +52,8 @@
               </div>
             </div>
           </caption>
-          <tbody>
+
+          <tbody id='in_active' style='display: block'>
             <tr>
               <th>Номер заявки</th>
               <th>Реквизиты</th>
@@ -61,31 +62,153 @@
               <th>Сделки</th>
               <th>Действия</th>
             </tr>
+            {% for item in in_active %}
             <tr>
-              <td>1</td>
-              <td>121421</td>
-              <td>2</td>
-              <td>2</td>
-              <td>2</td>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.wallets }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.id }}</td>
+              {% if item.condition is True%}
               <td>
                 <div class="table__get">Успешно</div>
               </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>2</td>
-              <td>1214241121</td>
-              <td>24</td>
-              <td>2</td>
+              {% else %}
               <td>
-                <div class="table__get">Успешно</div>
+                <div class="table__get">Не успешно</div>
               </td>
+              {% endif %}
             </tr>
+           {% endfor %}
           </tbody>
+
+
+          <tbody id='in_check' style='display: none'>
+            <tr>
+              <th>Номер заявки</th>
+              <th>Реквизиты</th>
+              <th>Отправляем</th>
+              <th>Получаем</th>
+              <th>Сделки</th>
+              <th>Действия</th>
+            </tr>
+            {% for item in in_check %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.wallets }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.id }}</td>
+              {% if item.condition is True%}
+              <td>
+                <div class="table__get">Успешно</div>
+              </td>
+              {% else %}
+              <td>
+                <div class="table__get">Не успешно</div>
+              </td>
+              {% endif %}
+            </tr>
+           {% endfor %}
+          </tbody>
+
+
+          <tbody id='closed' style='display: none'>
+            <tr>
+              <th>Номер заявки</th>
+              <th>Реквизиты</th>
+              <th>Отправляем</th>
+              <th>Получаем</th>
+              <th>Сделки</th>
+              <th>Действия</th>
+            </tr>
+            {% for item in closed %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.wallets }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.id }}</td>
+              {% if item.condition is True%}
+              <td>
+                <div class="table__get">Успешно</div>
+              </td>
+              {% else %}
+              <td>
+                <div class="table__get">Не успешно</div>
+              </td>
+              {% endif %}
+            </tr>
+           {% endfor %}
+          </tbody>
+
+          <tbody id='all' style='display: none'>
+            <tr>
+              <th>Номер заявки</th>
+              <th>Реквизиты</th>
+              <th>Отправляем</th>
+              <th>Получаем</th>
+              <th>Сделки</th>
+              <th>Действия</th>
+            </tr>
+            {% for item in all %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ item.wallets }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.id }}</td>
+              {% if item.condition is True%}
+              <td>
+                <div class="table__get">Успешно</div>
+              </td>
+              {% else %}
+              <td>
+                <div class="table__get">Не успешно</div>
+              </td>
+              {% endif %}
+            </tr>
+           {% endfor %}
+          </tbody>
+
+
         </table>
       </div>
     </div>
   </section>
 </div>
+
+<script>
+  var in_active_btn = document.getElementById('in_active_btn')
+  var in_check_btn = document.getElementById('in_check_btn')
+  var closed_btn = document.getElementById('closed_btn')
+  var all_btn = document.getElementById('all_btn')
+
+  in_active_btn.addEventListener("click", function (e) {
+    document.getElementById('in_active').style = 'display: block';
+    document.getElementById('in_check').style = 'display: none';
+    document.getElementById('all').style = 'display: none';
+    document.getElementById('closed').style = 'display: none';
+  });
+  in_check_btn.addEventListener("click", function (e) {
+    document.getElementById('in_active').style = 'display: none';
+    document.getElementById('in_check').style = 'display: block';
+    document.getElementById('all').style = 'display: none';
+    document.getElementById('closed').style = 'display: none';
+  });
+  closed_btn.addEventListener("click", function (e) {
+    document.getElementById('in_active').style = 'display: none';
+    document.getElementById('in_check').style = 'display: none';
+    document.getElementById('all').style = 'display: none';
+    document.getElementById('closed').style = 'display: block';
+  });
+  all_btn.addEventListener("click", function (e) {
+    document.getElementById('in_active').style = 'display: none';
+    document.getElementById('in_check').style = 'display: none';
+    document.getElementById('all').style = 'display: block';
+    document.getElementById('closed').style = 'display: none';
+  });
+
+</script>
 
 {% endblock %}

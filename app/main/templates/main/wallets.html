@@ -16,13 +16,13 @@
                 <div class="table__top-btn">Кошельки</div>
               </div>
               <div class="table__top-right">
-                <button class="table__btn-add">
+                <a class="table__get js-popup--link" href="#request-pop-up">
                   <svg width="36" height="35" viewBox="0 0 36 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="17.7796" cy="17.4139" r="16.8626" stroke="#A2B2D9" />
                     <path d="M17.7802 9.77441V18.1085M17.7802 26.4425V18.1085M17.7802 18.1085H26.1142H10.1406"
                       stroke="#A2B2D9" />
                   </svg>
-                </button>
+                </a>
               </div>
             </div>
           </caption>
@@ -51,12 +51,12 @@
                   </div>
                   <ul class="table__sublist">
                     <li class="table__sub-item">
-                      <button class="table__sub-btn js-close-option">
+                      <button class="table__sub-btn js-close-option" >
                         Изменить
                       </button>
                     </li>
                     <li class="table__sub-item">
-                      <button class="table__sub-btn js-close-option">
+                      <button class="table__sub-btn js-close-option" onclick='window.location.href = "/wallets/{{wallet.id}}";'>
                         Удалить
                       </button>
                     </li>
@@ -73,4 +73,61 @@
 </div>
 
 
+<div class="popup request-pop-up" id="request-pop-up">
+  <div class="popup__body">
+    <div class="popup__content">
+      <a href="#" class="popup__close popup--close"></a>
+
+      <div class="popup__inner">
+        <div class="popup__title">Добавить реквизиты</div>
+
+        <div class="request-pop-up__top">
+          <form>
+            {% csrf_token %}
+            <div class="request-pop-up__input-wrap">
+              <input id='active' style='display: none'>
+              <input
+                class="request-pop-up__input"
+                type="text"
+                id="props"
+                placeholder="Ввести данные"
+              />
+              <label class="request-pop-up__label" for="props"
+                >Ввести данные реквизита</label
+              >
+            </div>
+            <button class="request-pop-up__btn" type="button" id="btnSave">
+              Cохранить
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function getCookie(name) {
+    let cookie = {};
+    document.cookie.split(";").forEach(function (el) {
+      let [k, v] = el.split("=");
+      cookie[k.trim()] = v;
+    });
+    return cookie[name];
+  }
+
+  var btnSave = document.getElementById("btnSave");
+
+  btnSave.addEventListener("click", function (e) {
+    data = { props: document.getElementById("props").value };
+    const response = fetch("/getWallets", {
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        "X-CSRFTOKEN": getCookie("csrftoken"),
+      },
+      method: "POST",
+      body: new URLSearchParams(data),
+    });
+    location.reload()
+  });
+</script>
 {% endblock %}

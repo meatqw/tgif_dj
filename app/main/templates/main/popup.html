@@ -1,71 +1,125 @@
 <div class="popup request-pop-up" id="request-pop-up">
-    <div class="popup__body">
-      <div class="popup__content">
-        <a href="#" class="popup__close popup--close"></a>
-  
-        <div class="popup__inner">
-          <div class="popup__title">
-            Добавить реквизиты
-          </div>
-  
-          <div class="request-pop-up__top">
-            <form>
-              <div class="request-pop-up__input-wrap">
-                <input class="request-pop-up__input" type="text" id="requst-1" placeholder="Ввести данные">
-                <label class="request-pop-up__label" for="requst-1">Ввести данные реквизита</label>
-              </div>
-              <button class="request-pop-up__btn" type="submit">
-                Cохранить
-              </button>
-            </form>
-          </div>
-          <div class="request-pop-up__bottom">
-            <div class="table">
-  
-  
-              <table class="table__inner">
-                <caption>
-                  <div class="table__top">
-  
-                  </div>
-                </caption>
-                <tbody>
-                  <tr>
-                    <th>Вкл</th>
-                    <th>Реквизит</th>
-  
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="table__check-wrap">
-                        <input class="table__checkbox" type="checkbox" id="tb-rq-1">
-                        <label class="table__check-label" for="tb-rq-1">
-  
-                        </label>
-                      </div>
-                    </td>
-                    <td>6495673995847351</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="table__check-wrap">
-                        <input class="table__checkbox" type="checkbox" id="tb-rq-2">
-                        <label class="table__check-label" for="tb-rq-2">
-  
-                        </label>
-                      </div>
-                    </td>
-                    <td>6495673995847351</td>
-                  </tr>
-  
-                </tbody>
-              </table>
-  
+  <div class="popup__body">
+    <div class="popup__content">
+      <a href="#" class="popup__close popup--close"></a>
+
+      <div class="popup__inner">
+        <div class="popup__title">Добавить реквизиты</div>
+
+        <div class="request-pop-up__top">
+          <form>
+            {% csrf_token %}
+            <div class="request-pop-up__input-wrap">
+              <input id='active' style='display: none'>
+              <input
+                class="request-pop-up__input"
+                type="text"
+                id="props"
+                placeholder="Ввести данные"
+              />
+              <label class="request-pop-up__label" for="props"
+                >Ввести данные реквизита</label
+              >
             </div>
-          </div>
-  
+            <button class="request-pop-up__btn" type="button" id="btnSave">
+              Cохранить
+            </button>
+          </form>
         </div>
-  
+        <div class="request-pop-up__bottom">
+          <div class="table">
+            <table class="table__inner">
+              <caption>
+                <div class="table__top"></div>
+              </caption>
+              <tbody id="wallets"></tbody>
+            </table>
+            <button class="request-pop-up__btn" type="button" id="btnOk">
+              Принять
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
+<script>
+  async function getData() {
+    let url = "/getWallets";
+    let response = await fetch(url);
+    let wallets = await response.json();
+
+    let content = `<tr>
+      <th>Вкл</th>
+      <th>Реквизит</th>
+    </tr>`;
+
+    for (var i = 0; i < wallets["wallets"].length; i++) {
+      content += `<tr>
+        <td>
+          <div class="table__check-wrap">
+            <input
+              class="table__checkbox"
+              type="checkbox"
+              id="${wallets["wallets"][i].props}"
+            />
+            <label class="table__check-label" for="${wallets["wallets"][i].props}"> </label>
+          </div>
+        </td>
+        <td>${wallets["wallets"][i].props}</td>
+      </tr>`;
+    }
+    console.log(document.cookie);
+    document.getElementById("wallets").innerHTML = content;
+  }
+
+  getData();
+</script>
+
+<script>
+  function getCookie(name) {
+    let cookie = {};
+    document.cookie.split(";").forEach(function (el) {
+      let [k, v] = el.split("=");
+      cookie[k.trim()] = v;
+    });
+    return cookie[name];
+  }
+
+  var btnSave = document.getElementById("btnSave");
+
+  btnSave.addEventListener("click", function (e) {
+    data = { props: document.getElementById("props").value };
+    const response = fetch("/getWallets", {
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        "X-CSRFTOKEN": getCookie("csrftoken"),
+      },
+      method: "POST",
+      body: new URLSearchParams(data),
+    });
+    getData();
+  });
+</script>
+
+<script>
+  var btnOk = document.getElementById("btnOk");
+  btnOk.addEventListener("click", function (e) {
+    box = document.getElementsByClassName("table__checkbox");
+    var wallet_dict = [];
+    for (var i = 0; i < box.length; i++) {
+      if (box[i].checked == true) {
+        wallet_dict.push(box[i].id);
+      }
+    }
+    data = { wallets: wallet_dict, id: document.getElementById('active').value};
+    const response = fetch("/req", {
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        "X-CSRFTOKEN": getCookie("csrftoken"),
+      },
+      method: "POST",
+      body: new URLSearchParams(data),
+    });
+  });
+</script>
