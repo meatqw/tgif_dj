@@ -1,0 +1,245 @@
+.table {
+  &__inner {
+    border-collapse: collapse;
+    text-align: center;
+    min-width: 100%;
+    font-size: 17px;
+    color: $default;
+    table-layout: fixed;
+
+    & caption {
+      text-align: left;
+    }
+
+    & tr {
+      &:first-child {
+        & th {
+          background-color: $blue-light;
+          font-weight: 400;
+          padding: 21px;
+          height: 60px;
+
+          @include adpt ($bmob-r) {
+            height: 40px;
+            font-size: 16px;
+            padding: 0 20px;
+            white-space: nowrap;
+          }
+        }
+      }
+
+      &:not(:first-child) {
+        & td {
+          height: 60px;
+
+          @include adpt ($bmob-r) {
+            height: 40px;
+            padding: 0 20px;
+            font-size: 16px;
+          }
+
+          &:nth-child(even) {
+            background-color: #C1C5CF;
+          }
+
+          &:nth-child(odd) {
+            background-color: #D0D2D9;
+          }
+        }
+      }
+
+      &:last-child {
+        & td {
+          border: none;
+        }
+      }
+    }
+
+    & td {
+      padding: 5px 10px;
+      border-bottom: 2px solid #B9B9B9;
+
+      @include adpt ($bmob-r) {
+        padding: 0 20px;
+      }
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px 5px 0px 0px;
+    background-color: $default;
+    color: $blue-light;
+    padding: 7px 38px 0;
+    font-size: 18px;
+    min-width: 100%;
+
+    @include adpt ($stab-r) {
+      padding: 5px 20px 0;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 16px;
+    }
+  }
+
+  &__get {
+    background-color: #87D06D;
+    padding: 8px 42px;
+    box-shadow: 0px 4px 9px rgba(120, 151, 109, 0.45);
+    border-radius: 4px;
+    display: inline-block;
+
+    @include adpt ($bmob-r) {
+      font-size: 14px;
+      padding: 4px 15px;
+    }
+  }
+
+  &__top-btn {
+    padding: 20px 30px;
+    border-radius: 5px 5px 0px 0px;
+    transition: color 0.3s, background-color 0.3s;
+
+    @include adpt ($bmob-r) {
+      padding: 11px;
+      font-size: 16px;
+    }
+
+    &._active {
+      background-color: $blue-light;
+      color: $default;
+    }
+  }
+
+  &__top-left {
+    flex-shrink: 0;
+  }
+
+  &__top-right {
+    flex-shrink: 0;
+    margin-left: 30px;
+  }
+
+  &__btn-sw {
+    width: 30px;
+    height: 30px;
+
+    & svg {
+      object-fit: contain;
+    }
+
+    & svg path {
+      transition: fill 0.3s, stroke 0.3s;
+    }
+
+    &._active {
+      & svg path {
+        fill: #3BF642;
+        stroke: #3BF642;
+      }
+    }
+  }
+
+  &__btn-add {
+    width: 35px;
+    height: 35px;
+
+    @include adpt ($bmob-r) {
+      width: 30px;
+      height: 30px;
+    }
+
+    & svg {
+      object-fit: contain;
+
+      @include adpt ($bmob-r) {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+
+  &__check-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+
+    &:checked+label {
+      background-image: url('../images/icon/check.svg');
+    }
+
+  }
+
+  &__check-label {
+    cursor: pointer;
+    position: relative;
+    min-width: 23px;
+    height: 23px;
+    border: 1px solid #47A29F;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center;
+  }
+
+  &__option {
+    position: relative;
+    max-width: 150px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__option-top {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    padding: 5px 12px;
+    background-color: #212834;
+    border-radius: 2px;
+    color: $blue-light;
+
+    & svg {
+      width: 16px;
+      height: 7px;
+      object-fit: contain;
+      margin-left: 5px;
+    }
+  }
+
+  &__sublist {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    border: 1px solid #47A29F;
+    border-radius: 2px;
+    background-color: #C6C7C8;
+    width: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  &__sub-item {
+    &:not(:last-child) {
+      border-bottom: 1px solid #47A29F;
+    }
+  }
+
+  &__sub-btn {
+    font-size: 14px;
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+  }
+}

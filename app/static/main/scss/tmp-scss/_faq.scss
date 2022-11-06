@@ -1,0 +1,140 @@
+.faq {
+
+  &__title {
+    text-transform: uppercase;
+    color: $blue-light;
+    font-size: 30px;
+    margin-bottom: 50px;
+
+    @include adpt ($stab-r) {
+      font-size: 25px;
+      margin-bottom: 20px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 20px;
+    }
+  }
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 80px;
+    padding: 0 30px;
+
+    @include adpt ($big-r) {
+      grid-gap: 50px;
+      padding: 0;
+    }
+
+    @include adpt ($stab-r) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item-inner {
+    position: relative;
+    margin-bottom: 150px;
+    padding-left: 25px;
+    color: $blue-light;
+
+    @include adpt ($big-r) {
+      margin-bottom: 100px;
+    }
+
+    @include adpt ($stab-r) {
+      padding-left: 15px;
+    }
+
+    @include adpt ($bmob-r) {
+      margin-bottom: 50px;
+    }
+
+    &::after,
+    &::before {
+      content: "";
+      position: absolute;
+    }
+
+    &::after {
+      background-color: #4061B0;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      left: -10px;
+      top: 10px;
+
+      @include adpt ($stab-r) {
+        width: 11px;
+        height: 11px;
+        top: 7px;
+        left: -5px;
+      }
+    }
+
+    &::before {
+      left: 0;
+      top: 45px;
+      height: calc(100% - 30px);
+      width: 1px;
+      background-color: $blue-light;
+
+      @include adpt ($stab-r) {
+        top: 30px;
+      }
+    }
+  }
+
+  &__item-title {
+    font-weight: 500;
+    font-size: 33px;
+    line-height: 40px;
+    margin-bottom: 40px;
+
+    @include adpt ($big-r) {
+      font-size: 25px;
+      margin-bottom: 30px;
+    }
+
+    @include adpt ($stab-r) {
+      font-size: 20px;
+      margin-bottom: 20px;
+      line-height: 26px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 18px;
+      margin-bottom: 15px;
+      line-height: 22px;
+    }
+  }
+
+  &__list {
+    padding-left: 40px;
+    max-width: 527px;
+
+    @include adpt ($big-r) {
+      padding-left: 30px;
+    }
+
+    @include adpt ($bmob-r) {
+      padding-left: 20px;
+    }
+  }
+
+  &__item {
+    font-size: 21px;
+
+    @include adpt ($big-r) {
+      font-size: 18px;
+    }
+
+    @include adpt ($bmob-r) {
+      font-size: 16px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+}

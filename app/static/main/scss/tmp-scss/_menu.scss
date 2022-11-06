@@ -1,0 +1,76 @@
+.menu {
+  padding: 30px 15px;
+  background-color: $default;
+
+  @include adpt ($tab-r) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    transform: translateX(-100%);
+    padding: 25px 15px 50px;
+    transition: all 0.5s ease;
+    overflow-y: auto;
+
+    &._open {
+      transform: translateX(0);
+    }
+  }
+
+  &__logo {
+    margin-left: 50px;
+    margin-bottom: 50px;
+
+    @include adpt ($tab-r) {
+      margin-bottom: 0;
+      margin-left: 0;
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include adpt ($tab-r) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &__top-left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 30px;
+
+      @include adpt ($big-r) {
+        margin-bottom: 20px;
+      }
+
+      @include adpt ($stab-r) {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  &__link {
+    padding: 12px 12px 12px 50px;
+    border-radius: 5px;
+    display: block;
+    color: $blue-light;
+    font-size: 17px;
+    transition: background-color 0.3s, color 0.3s;
+
+
+    &:hover,
+    &._active {
+      background-color: rgba(#A2B2D9, 0.8);
+      color: $default;
+    }
+  }
+}

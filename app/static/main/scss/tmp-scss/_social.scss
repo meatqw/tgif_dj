@@ -1,0 +1,26 @@
+.social {
+  display: flex;
+  align-items: center;
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: 20px;
+
+      @include adpt ($tab-r) {
+        margin-right: 15px;
+      }
+    }
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+}
