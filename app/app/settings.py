@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/Users/neetqw/python/tgif_dj/app/my.cnf',
+            'read_default_file': '/var/www/tgif_dj/app/my.cnf',
         },
     }
 }
