@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-8n=uz6qgmxxb9&zvqlgbc@$(@$fwf%j0_yjzrp(373ke78mf9s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['80.87.194.13']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'read_default_file': '/var/www/tgif_dj/app/my.cnf',
+            'read_default_file': f'{BASE_DIR}/my.cnf',
         },
     }
 }
@@ -120,7 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 
