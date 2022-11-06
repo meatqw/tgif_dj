@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 import os
 import sys
 
-path = "/var/www/tgif_dj"
+path = "/var/www/tgif_dj/app"
 if path not in sys.path:
     sys.path.insert(0, path)
 
