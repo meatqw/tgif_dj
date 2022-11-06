@@ -27,7 +27,7 @@ python manage.pu cretesuperuser
                 Require all granted
         </Directory>
 
-        Alias /static/admin/ /var/www/tgif_dj/.venv/lib/python3.6/site-packages/django/contrib/admin/static/admin/
+        Alias /static/admin /var/www/tgif_dj/.venv/lib/python3.6/site-packages/django/contrib/admin/static/admin/
         <Directory /var/www/tgif_dj/.venv/lib/python3.6/site-packages/django/contrib/admin/static/admin/>
                 Require all granted
         </Directory>
