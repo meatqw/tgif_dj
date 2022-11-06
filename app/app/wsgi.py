@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
 path = "/var/www/tgif_dj"
 if path not in sys.path:
