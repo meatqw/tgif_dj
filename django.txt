@@ -1,3 +1,27 @@
+sudo apt-get update
+sudo apt-get install python3-pip apache2 libapache2-mod-wsgi-py3
+
+# venv
+sudo pip3 install virtualenv
+
+# create venv 
+virtualenv venv
+
+# start venv
+source venv/bin/activate
+
+# set ip in settings.py
+ALLOWED_HOSTS = ["server_domain_or_IP"]
+
+# add static root in settings.py
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# проблемы с бд из за кодеровки
+# перед миграцией сменить 
+ALTER DATABASE tgif CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+####################
+# create project
 django-admin startproject app
 
 # run
@@ -14,6 +38,11 @@ python manage.pu migrate
 
 # cretesuperuser
 python manage.pu cretesuperuser
+
+# collect static files
+python manage.py collectstatic
+
+###########################
 
 <VirtualHost *:80>
         ServerName localhost
@@ -41,19 +70,3 @@ python manage.pu cretesuperuser
         WSGIProcessGroup tgif_dj
         WSGIScriptAlias / /var/www/tgif_dj/app/wsgi.py
 </VirtualHost>
-
-
-# WSGI
-
-import os
-import sys
-
-path = "/var/www/tgif_dj/app"
-if path not in sys.path:
-    sys.path.insert(0, path)
-
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
-
-application = get_wsgi_application()
