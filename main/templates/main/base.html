@@ -251,6 +251,15 @@
     <script src="{% static 'main/js/main.min.js' %}"></script>
   </body>
   <script>
+    function getCookie(name) {
+      let cookie = {};
+      document.cookie.split(";").forEach(function (el) {
+        let [k, v] = el.split("=");
+        cookie[k.trim()] = v;
+      });
+      return cookie[name];
+    }
+
     function copyEvent(id)
     {
         var str = document.getElementById(id);

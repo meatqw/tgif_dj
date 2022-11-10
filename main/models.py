@@ -21,6 +21,7 @@ class News(models.Model):
 class User(models.Model):
     '''User model'''
     token = models.CharField('Token', max_length=50)
+    power = models.BooleanField(default=False)
     requests = models.IntegerField('Requests')
     escrow = models.IntegerField('escrow')
     balance = models.IntegerField('balance')
@@ -121,7 +122,7 @@ class WalletsAdmin(admin.ModelAdmin):
 
 class UserAdmin(admin.ModelAdmin):
     '''Show all fields in admin'''
-    list_display = [field.name for field in User._meta.fields]
+    list_display = [field.name for field in User._meta.fields if field.name not in ['is_admin', 'is_active', 'is_staff', 'is_superuser']]
 
 class NewsAdmin(admin.ModelAdmin):
     '''Show all fields in admin'''

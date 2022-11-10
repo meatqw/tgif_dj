@@ -26,12 +26,12 @@
                 </button>
               </div>
               <div class="table__top-right">
-                <button class="table__btn-sw _active">
+                <button class="table__btn-sw {% if user.power == True %}_active{%endif %}" id='activeBtn'>
                   <svg
                     width="30"
                     height="30"
                     viewBox="0 0 30 30"
-                    fill="none"
+                    fill="None"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
@@ -69,15 +69,10 @@
               <td>{{ item.amount }}</td>
               <td>{{ item.amount }}</td>
               <td>{{ item.id }}</td>
-              {% if item.condition is True%}
               <td>
-                <div class="table__get">Успешно</div>
+                <button class="table__get">Успешно</button>
+                <button class="table__close">Отказаться</button>
               </td>
-              {% else %}
-              <td>
-                <div class="table__get">Не успешно</div>
-              </td>
-              {% endif %}
             </tr>
            {% endfor %}
           </tbody>
@@ -99,15 +94,10 @@
               <td>{{ item.amount }}</td>
               <td>{{ item.amount }}</td>
               <td>{{ item.id }}</td>
-              {% if item.condition is True%}
               <td>
-                <div class="table__get">Успешно</div>
+                <button class="table__get">Успешно</button>
+                <button class="table__close">Отказаться</button>
               </td>
-              {% else %}
-              <td>
-                <div class="table__get">Не успешно</div>
-              </td>
-              {% endif %}
             </tr>
            {% endfor %}
           </tbody>
@@ -129,15 +119,10 @@
               <td>{{ item.amount }}</td>
               <td>{{ item.amount }}</td>
               <td>{{ item.id }}</td>
-              {% if item.condition is True%}
               <td>
-                <div class="table__get">Успешно</div>
+                <button class="table__get">Успешно</button>
+                <button class="table__close">Отказаться</button>
               </td>
-              {% else %}
-              <td>
-                <div class="table__get">Не успешно</div>
-              </td>
-              {% endif %}
             </tr>
            {% endfor %}
           </tbody>
@@ -158,15 +143,10 @@
               <td>{{ item.amount }}</td>
               <td>{{ item.amount }}</td>
               <td>{{ item.id }}</td>
-              {% if item.condition is True%}
               <td>
-                <div class="table__get">Успешно</div>
+                <button class="table__get">Успешно</button>
+                <button class="table__close">Отказаться</button>
               </td>
-              {% else %}
-              <td>
-                <div class="table__get">Не успешно</div>
-              </td>
-              {% endif %}
             </tr>
            {% endfor %}
           </tbody>
@@ -177,6 +157,35 @@
     </div>
   </section>
 </div>
+
+<script>
+  // push active btn
+
+    function switchStatus(status) {
+      const response = fetch("/switchPower", {
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+          "X-CSRFTOKEN": getCookie("csrftoken"),
+        },
+        method: "POST",
+        body: new URLSearchParams({'status': status}),
+      });
+  }
+
+  var activeBtn = document.getElementById('activeBtn')
+  activeBtn.addEventListener("click", function (e) {
+    if (activeBtn.className == 'table__btn-sw _active' ) {
+      activeBtn.className = 'table__btn-sw'
+      switchStatus(false);
+    } else {
+      activeBtn.className = 'table__btn-sw _active'
+      switchStatus(true);
+    }
+    
+      
+  });
+
+</script>
 
 <script>
   var in_active_btn = document.getElementById('in_active_btn')

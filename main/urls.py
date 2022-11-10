@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('switchPower', views.switch_power, name='switchPower'),
     path('entry', views.entry, name='entry'),
     # path('entry', include('django.contrib.auth.urls')),
     path('faq', views.faq, name='faq'),

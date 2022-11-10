@@ -20,6 +20,23 @@ def index(request):
     
     return render(request, 'main/index.html', {'in_active': in_active, 'closed': closed, 'in_check': in_check, 'all': req})
 
+
+@login_required
+def switch_power(request):
+    """SWITCH power status"""
+    
+    if request.method == 'POST':
+        status = request.POST['status']
+        if status == 'true':
+            status = True
+        else:
+            status = False
+            
+        User.objects.filter(id=request.user.id).update(power=status)
+        
+        return JsonResponse({'status': status})
+
+
 @login_required
 def get_wallets(request):
     
@@ -89,7 +106,7 @@ def req(request):
     if request.method == 'POST':
         wallets = request.POST['wallets']
         user = request.user
-        status = 1
+        status = 2
         id = request.POST['id']
         Request.objects.filter(id = id).update(user=user, status=status, wallets=wallets)
         

@@ -24,7 +24,7 @@
             <tr>
               <td>{{ forloop.counter }}</td>
               <td>{{ item.amount }}</td>
-              <td>{{ item.lifespan }}</td>
+              <td id='lifespan'>{{ item.lifespan }}</td>
               <td>
                 <a class="table__get js-popup--link" onclick='document.getElementById("active").value={{item.id}}' href="#request-pop-up"
                   >Принять</a
@@ -38,5 +38,20 @@
     </div>
   </section>
 </div>
+<script>
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+  async function timer() {
+    while (true) {
+      var lifespan = document.getElementById('lifespan')
+      lifespan.innerHTML = lifespan.innerHTML - 1
+      await sleep(1000)
+    }
+    
+  }
+  timer()
+</script>
 {% include 'main/popup.html' %}
 {% endblock %}
