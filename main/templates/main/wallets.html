@@ -36,8 +36,8 @@
             <tr>
               <td>
                 <div class="table__check-wrap">
-                  <input class="table__checkbox" type="checkbox" id="tb-rq-1" />
-                  <label class="table__check-label" for="tb-rq-1"> </label>
+                  <input class="table__checkbox" type="checkbox" id="{{wallet.id}}" {% if wallet.status == True %}checked{%endif %} onclick="switchWalletStatus({{wallet.id}})" />
+                  <label class="table__check-label" for="{{wallet.id}}"> </label>
                 </div>
               </td>
               <td>{{ wallet.props }}</td>
@@ -49,11 +49,12 @@
                       <path d="M16.2529 0.171875H0.279297L8.61334 7.11691L16.2529 0.171875Z" fill="#A2B2D9" />
                     </svg>
                   </div>
+                  <input type="hidden" id="wID" name="id" value=""></input>
                   <ul class="table__sublist">
                     <li class="table__sub-item">
-                      <button class="table__sub-btn js-close-option" >
+                      <a class="table__sub-btn js-popup--link js-close-option" onclick="document.getElementById('wID').value={{wallet.id}}" href="#request-pop-up_">
                         Изменить
-                      </button>
+                      </a>
                     </li>
                     <li class="table__sub-item">
                       <button class="table__sub-btn js-close-option" onclick='window.location.href = "/wallets/{{wallet.id}}";'>
@@ -105,6 +106,57 @@
     </div>
   </div>
 </div>
+
+<div class="popup request-pop-up" id="request-pop-up_">
+  <div class="popup__body">
+    <div class="popup__content">
+      <a href="#" class="popup__close popup--close"></a>
+
+      <div class="popup__inner">
+        <div class="popup__title">Изменить реквизиты</div>
+
+        <div class="request-pop-up__top">
+          <form>
+            {% csrf_token %}
+            <div class="request-pop-up__input-wrap">
+              <input id='active' style='display: none'>
+              <input
+                class="request-pop-up__input"
+                type="text"
+                id="newProps"
+                placeholder="Введите новое значение"
+              />
+              <label class="request-pop-up__label" for="newProps"
+                >Ввести данные реквизита</label
+              >
+            </div>
+            <button class="request-pop-up__btn" type="button" id="btnUpdate">
+              Изменить
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function request(status, id, url) {
+      const response = fetch(url, {
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+          "X-CSRFTOKEN": getCookie("csrftoken"),
+        },
+        method: "POST",
+        body: new URLSearchParams({'status': status, 'id': id}),
+      });
+  }
+
+
+  function switchWalletStatus(id) {
+    var el = document.getElementById(id)
+      request(el.checked, id, '/switchWalletStatus')
+  }
+</script>
 <script>
   function getCookie(name) {
     let cookie = {};
@@ -116,10 +168,25 @@
   }
 
   var btnSave = document.getElementById("btnSave");
+  var btnUpdate = document.getElementById("btnUpdate");
+
 
   btnSave.addEventListener("click", function (e) {
     data = { props: document.getElementById("props").value };
     const response = fetch("/getWallets", {
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        "X-CSRFTOKEN": getCookie("csrftoken"),
+      },
+      method: "POST",
+      body: new URLSearchParams(data),
+    });
+    location.reload()
+  });
+
+  btnUpdate.addEventListener("click", function (e) {
+    data = { props: document.getElementById("newProps").value, id: document.getElementById("wID").value};
+    const response = fetch("/updateWallet", {
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
         "X-CSRFTOKEN": getCookie("csrftoken"),

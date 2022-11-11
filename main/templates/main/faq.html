@@ -1,4 +1,3 @@
-
 {% extends 'main/base.html' %}
 
 {% block content %}
@@ -7,45 +6,14 @@
     <h1 class="faq__title">faq</h1>
     <div class="faq__inner">
       <div class="faq__left">
+
+        {% for item in faq %}
         <div class="faq__item-inner">
-          <div class="faq__item-title">Правила поведения на сайте</div>
-          <ol class="faq__list">
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайтеПримерный текст
-              на сайте
-            </li>
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайте
-            </li>
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайте
-            </li>
-          </ol>
+          <div class="faq__item-title">{{ item.title }}</div>
+          {{ item.text | safe }}
         </div>
 
-        <div class="faq__item-inner">
-          <div class="faq__item-title">Инструкция</div>
-          <ol class="faq__list">
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайтеПримерный текст
-              на сайте
-            </li>
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайте
-            </li>
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайте
-            </li>
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайтеПримерный текст
-              на сайте
-            </li>
-            <li class="faq__item">
-              Примерный текст на сайте Примерный текст на сайтеПримерный текст
-              на сайте
-            </li>
-          </ol>
-        </div>
+        {% endfor %}
       </div>
       <div class="faq__right">
         <form class="feedback" action="/faq" method="post">
@@ -56,31 +24,17 @@
           </div>
           <div class="feedback__input-wrap">
             <label class="feedback__label" for="email-input"> Ваш email </label>
-            <input
-              class="feedback__input"
-              id="email-input"
-              placeholder="Ваш email"
-              type="email"
-              name="email"
-            />
+            <input class="feedback__input" id="email-input" placeholder="Ваш email" type="email" name="email" />
           </div>
           <div class="feedback__input-wrap">
             <label class="feedback__label" for="quest-input">
               Ваш вопрос
             </label>
-            <textarea
-              class="feedback__input feedback__textarea"
-              id="quest-input"
-              placeholder="Ваш вопрос"
-              name="question"
-            ></textarea>
+            <textarea class="feedback__input feedback__textarea" id="quest-input" placeholder="Ваш вопрос"
+              name="question"></textarea>
           </div>
           <div class="feedback__input-wrap">
-            <input
-              class="feedback__checkbox"
-              type="checkbox"
-              id="feedback-check"
-            />
+            <input class="feedback__checkbox" type="checkbox" id="feedback-check" />
             <label class="feedback__checkbox-label" for="feedback-check">
               Даю согласие на <a href="#">обработку персональных данных</a>
             </label>

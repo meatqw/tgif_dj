@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('switchStatus', views.switch_req_status, name='switchStatus'),
     path('switchPower', views.switch_power, name='switchPower'),
     path('entry', views.entry, name='entry'),
     # path('entry', include('django.contrib.auth.urls')),
@@ -14,6 +15,8 @@ urlpatterns = [
     path('req', views.req, name='req'),
     path('wallets', views.wallets,  name='wallets'),
     path('wallets/<int:id>', views.del_wallet,  name='delWallets'),
+    path('updateWallet', views.update_wallets,  name='updateWallet'),
+    path('switchWalletStatus', views.switch_wallet_status, name='switchWalletStatus'),
     path('accounts/login', views.index, name='login'),
     path('getWallets', views.get_wallets, name='getWallets'),
     path('logout', views.logout_, name='logout')

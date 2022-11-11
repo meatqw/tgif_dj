@@ -111,10 +111,56 @@ class Question(models.Model):
         verbose_name = 'Вопрос'
         verbose_name_plural = 'Вопросы'
 
+class Faq(models.Model):
+    '''Faq model'''
+    title = models.CharField('title', max_length=200)
+    text = models.TextField('text')
+    datetime = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = 'FAQ'
+        verbose_name_plural = 'FAQ'
+
+
+class Tg(models.Model):
+    '''Faq model'''
+    tg_id = models.CharField('tg_id', max_length=200)
+    datetime = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return self.tg_id
+    
+    class Meta:
+        verbose_name = 'TG ID'
+        verbose_name_plural = 'TG IDs'
+
+class MainInfo(models.Model):
+    '''MainInfo model'''
+    account_number = models.CharField('account_number', max_length=200)
+    datetime = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return self.account_number
+    
+    class Meta:
+        verbose_name = 'MainInfo'
+        verbose_name_plural = 'MainInfo'
+
 
 class RequestAdmin(admin.ModelAdmin):
     '''Show all fields in admin'''
     list_display = [field.name for field in Request._meta.fields]
+
+class MainInfoAdmin(admin.ModelAdmin):
+    '''Show all fields in admin'''
+    list_display = [field.name for field in MainInfo._meta.fields]
+
+class FaqAdmin(admin.ModelAdmin):
+    '''Show all fields in admin'''
+    list_display = [field.name for field in Faq._meta.fields]
 
 class WalletsAdmin(admin.ModelAdmin):
     '''Show all fields in admin'''

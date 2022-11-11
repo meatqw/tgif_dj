@@ -53,7 +53,7 @@
             </div>
           </caption>
 
-          <tbody id='in_active' style='display'>
+          <tbody id='in_active'>
             <tr>
               <th>Номер заявки</th>
               <th>Реквизиты</th>
@@ -70,8 +70,8 @@
               <td>{{ item.amount }}</td>
               <td>{{ item.id }}</td>
               <td>
-                <button class="table__get">Успешно</button>
-                <button class="table__close">Отказаться</button>
+                <button class="table__get" id="successfully" onclick="reqStatusSwitch({{item.id}})">Успешно</button>
+                <button class="table__close" id="refusal" onclick="reqDelSwitch({{item.id}})">Отказаться</button>
               </td>
             </tr>
            {% endfor %}
@@ -110,7 +110,7 @@
               <th>Отправляем</th>
               <th>Получаем</th>
               <th>Сделки</th>
-              <th>Действия</th>
+              <!-- <th>Действия</th> -->
             </tr>
             {% for item in closed %}
             <tr>
@@ -119,10 +119,10 @@
               <td>{{ item.amount }}</td>
               <td>{{ item.amount }}</td>
               <td>{{ item.id }}</td>
-              <td>
+              <!-- <td>
                 <button class="table__get">Успешно</button>
                 <button class="table__close">Отказаться</button>
-              </td>
+              </td> -->
             </tr>
            {% endfor %}
           </tbody>
@@ -143,10 +143,16 @@
               <td>{{ item.amount }}</td>
               <td>{{ item.amount }}</td>
               <td>{{ item.id }}</td>
+              {% if item.status == 'Активная' %}
               <td>
                 <button class="table__get">Успешно</button>
                 <button class="table__close">Отказаться</button>
               </td>
+              {% else %}
+              <td>
+                
+              </td>
+              {% endif %}
             </tr>
            {% endfor %}
           </tbody>
@@ -161,14 +167,14 @@
 <script>
   // push active btn
 
-    function switchStatus(status) {
-      const response = fetch("/switchPower", {
+    function request(status, id, url) {
+      const response = fetch(url, {
         headers: {
           "Content-type": "application/x-www-form-urlencoded",
           "X-CSRFTOKEN": getCookie("csrftoken"),
         },
         method: "POST",
-        body: new URLSearchParams({'status': status}),
+        body: new URLSearchParams({'status': status, 'id': id}),
       });
   }
 
@@ -176,16 +182,33 @@
   activeBtn.addEventListener("click", function (e) {
     if (activeBtn.className == 'table__btn-sw _active' ) {
       activeBtn.className = 'table__btn-sw'
-      switchStatus(false);
+      request(false, 0, '/switchPower');
     } else {
       activeBtn.className = 'table__btn-sw _active'
-      switchStatus(true);
+      request(true, 0, '/switchPower');
     }
     
       
   });
 
 </script>
+
+<script>
+  function reqStatusSwitch(id) {
+    // successfully and refusal
+      request(3, id, '/switchStatus')
+      location.reload()
+
+  }
+  
+  function reqDelSwitch(id) {
+    request('del', id, '/switchStatus')
+    location.reload()
+  }
+
+</script>
+
+
 
 <script>
   var in_active_btn = document.getElementById('in_active_btn')

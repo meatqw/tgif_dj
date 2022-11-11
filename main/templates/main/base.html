@@ -71,7 +71,7 @@
                     class="balance__input"
                     disabled
                     type="text"
-                    value="7583958399294638"
+                    value="{{main.account_number}}"
                     id='copy'
                   />
                   <button class="balance__copy" onclick="copyEvent('copy')" type="button">
@@ -149,7 +149,7 @@
               <div class="content__item content__item_1">
                 <div class="content__item-top">Счёт-эскроу</div>
                 <div class="content__item-bottom">
-                  {{ user.escrow }}
+                  {{ escrow }}
                   <span>RUB</span>
                 </div>
               </div>
