@@ -9,9 +9,9 @@ def counter(cursor):
     result = cursor.fetchall()
     print(result)
     for req in result:
-        new_req = req[2] - MINUS_NUM
+        new_req = req[4] - MINUS_NUM
         
-        if new_req <= 0 and req[-3] == None:
+        if new_req <= 0 and req[-2] == None:
             cursor.execute(f'DELETE FROM main_request WHERE id = {req[0]}')
         else:
             cursor.execute(f'UPDATE main_request SET lifespan = {new_req} WHERE id = {req[0]}')
