@@ -202,6 +202,7 @@
   
   function reqDelSwitch(id) {
     request('del', id, '/switchStatus')
+    document.getElementById(id).remove()
     window.location.reload(true);
   }
 
