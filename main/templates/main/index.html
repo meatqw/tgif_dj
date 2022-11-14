@@ -63,15 +63,15 @@
               <th>Действия</th>
             </tr>
             {% for item in in_active %}
-            <tr>
+            <tr id='{{item.id}}'>
               <td>{{ forloop.counter }}</td>
               <td>{{ item.wallets }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.id }}</td>
+              <td>{{ item.send }}</td>
+              <td>{{ item.get }}</td>
+              <td>{{ item.deals }}</td>
               <td>
-                <button class="table__get" id="successfully" onclick="reqStatusSwitch({{item.id}})">Успешно</button>
-                <button class="table__close" id="refusal" onclick="reqDelSwitch({{item.id}})">Отказаться</button>
+                <button class="table__get" onclick="reqStatusSwitch({{item.id}})">Успешно</button>
+                <button class="table__close" onclick="reqDelSwitch({{item.id}})">Отказаться</button>
               </td>
             </tr>
            {% endfor %}
@@ -91,9 +91,9 @@
             <tr>
               <td>{{ forloop.counter }}</td>
               <td>{{ item.wallets }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.id }}</td>
+              <td>{{ item.send }}</td>
+              <td>{{ item.get }}</td>
+              <td>{{ item.deals }}</td>
               <td>
                 <button class="table__get">Успешно</button>
                 <button class="table__close">Отказаться</button>
@@ -116,9 +116,9 @@
             <tr>
               <td>{{ forloop.counter }}</td>
               <td>{{ item.wallets }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.id }}</td>
+              <td>{{ item.send }}</td>
+              <td>{{ item.get }}</td>
+              <td>{{ item.deals }}</td>
               <!-- <td>
                 <button class="table__get">Успешно</button>
                 <button class="table__close">Отказаться</button>
@@ -140,9 +140,9 @@
             <tr>
               <td>{{ forloop.counter }}</td>
               <td>{{ item.wallets }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.amount }}</td>
-              <td>{{ item.id }}</td>
+              <td>{{ item.send }}</td>
+              <td>{{ item.get }}</td>
+              <td>{{ item.deals }}</td>
               {% if item.status == 'Активная' %}
               <td>
                 <button class="table__get">Успешно</button>
@@ -187,8 +187,6 @@
       activeBtn.className = 'table__btn-sw _active'
       request(true, 0, '/switchPower');
     }
-    
-      
   });
 
 </script>
@@ -196,14 +194,15 @@
 <script>
   function reqStatusSwitch(id) {
     // successfully and refusal
-      request(3, id, '/switchStatus')
-      location.reload()
+      request('Завершенная', id, '/switchStatus')
+      document.getElementById(id).remove()
+      {% comment %} window.location.reload(true); {% endcomment %}
 
   }
   
   function reqDelSwitch(id) {
     request('del', id, '/switchStatus')
-    location.reload()
+    window.location.reload(true);
   }
 
 </script>

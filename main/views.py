@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import News, Request, User, Wallets, Question, Faq, Tg, MainInfo
+from .models import News, Request, User, Wallets, Question, Faq, Tg, MainInfo, Status
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -78,9 +78,11 @@ def news_page(request, id):
 def req(request):
     """REQUESTS page"""
     if request.method == 'POST':
+        status = Status.objects.filter(status_name='Активная').first()
+        print(status)
         wallets = request.POST['wallets']
         user = request.user
-        status = 1
+        status = status.id
         id = request.POST['id']
         Request.objects.filter(id=id).update(
             user=user, status=status, wallets=wallets)
@@ -114,6 +116,7 @@ def switch_power(request):
 
     if request.method == 'POST':
         status = request.POST['status']
+        
         if status == 'true':
             send_tg(Tg.objects.all(), f'Пользователь {request.user.token} Готов к работе 👍')
             
@@ -134,12 +137,17 @@ def switch_req_status(request):
 
         status = request.POST['status']
         id = request.POST['id']
+        
         if status != 'del':
+            status = Status.objects.filter(status_name=request.POST['status']).first()
+            
             User.objects.filter(id=request.user.id).update(
                 requests=request.user.requests + 1)
             Request.objects.filter(id=id).update(status=status)
 
             send_tg(Tg.objects.all(), f'Пользователь {request.user.token}\nИзменил статус заявки {id} ✅')
+            
+            return redirect('index')
 
         else:
             Request.objects.filter(id=id).delete()

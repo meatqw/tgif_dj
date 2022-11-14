@@ -5,9 +5,9 @@ from django.contrib import admin
 
 class News(models.Model):
     '''News model'''
-    title = models.CharField('Title', max_length=50)
+    title = models.CharField('Название', max_length=50)
     img = models.ImageField(null=True, blank=True, upload_to='images/')
-    description = models.TextField('Description')
+    description = models.TextField('Текст')
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
@@ -20,16 +20,16 @@ class News(models.Model):
 
 class User(models.Model):
     '''User model'''
-    token = models.CharField('Token', max_length=50)
+    token = models.CharField('Токен', max_length=50)
     power = models.BooleanField(default=False)
-    requests = models.IntegerField('Requests')
-    escrow = models.IntegerField('escrow')
-    balance = models.IntegerField('balance')
-    received = models.IntegerField('received')
+    requests = models.IntegerField('Заявки')
+    escrow = models.IntegerField('Эскроу')
+    balance = models.IntegerField('Баланс')
+    received = models.IntegerField('Получено')
     date_joined = models.DateTimeField(
-        'data joined', auto_now_add=True, blank=True)
+        'Дата создания', auto_now_add=True, blank=True)
     last_login = models.DateTimeField(
-        'last login', auto_now_add=True, blank=True)
+        'Последний визит', auto_now_add=True, blank=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -57,7 +57,7 @@ class User(models.Model):
 
 class Wallets(models.Model):
     '''Wallets model'''
-    props = models.CharField('Props', max_length=50)
+    props = models.CharField('Реквизиты', max_length=50)
     status = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
@@ -71,21 +71,28 @@ class Wallets(models.Model):
         
 class Status(models.Model):
     '''status for requests'''
-    status_name = models.CharField('status', max_length=50)
+    status_name = models.CharField('Наименование статуса', max_length=50)
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
     
     def __str__(self):
         return self.status_name
     
+    class Meta:
+        verbose_name = 'Статус заявки'
+        verbose_name_plural = 'Статусы заявок'
+    
 
 class Request(models.Model):
     '''Request model'''
-    amount = models.CharField('amount', max_length=50)
-    lifespan = models.IntegerField('lifespan')
+    amount = models.CharField('Сумма', max_length=50)
+    send = models.CharField('Отправляем', max_length=50)
+    get = models.CharField('Получаем', max_length=50)
+    deals = models.CharField('Сделки', max_length=50)
+    lifespan = models.IntegerField('Срок жизни')
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
-    status = models.ForeignKey(Status, on_delete=models.PROTECT, null=False)
-    condition = models.BooleanField('condition', default=False)
-    wallets = models.JSONField('Wallets', default='{}')
+    status = models.ForeignKey(Status, on_delete=models.PROTECT, null=False, default="Новая")
+    # condition = models.BooleanField('condition', default=False)
+    wallets = models.JSONField('Реквизиты', default='{}')
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
     
 
@@ -99,8 +106,8 @@ class Request(models.Model):
 
 class Question(models.Model):
     '''Question model'''
-    email = models.CharField('email', max_length=100)
-    question = models.TextField('question')
+    email = models.CharField('Почта', max_length=100)
+    question = models.TextField('Вопрос')
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
 
@@ -113,8 +120,8 @@ class Question(models.Model):
 
 class Faq(models.Model):
     '''Faq model'''
-    title = models.CharField('title', max_length=200)
-    text = models.TextField('text')
+    title = models.CharField('Заголовок', max_length=200)
+    text = models.TextField('Текст')
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
@@ -127,7 +134,7 @@ class Faq(models.Model):
 
 class Tg(models.Model):
     '''Faq model'''
-    tg_id = models.CharField('tg_id', max_length=200)
+    tg_id = models.CharField('TG id', max_length=200)
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
@@ -139,15 +146,15 @@ class Tg(models.Model):
 
 class MainInfo(models.Model):
     '''MainInfo model'''
-    account_number = models.CharField('account_number', max_length=200)
+    account_number = models.CharField('Номер счета', max_length=200)
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.account_number
     
     class Meta:
-        verbose_name = 'MainInfo'
-        verbose_name_plural = 'MainInfo'
+        verbose_name = 'Номер счета'
+        verbose_name_plural = 'Номер счета'
 
 
 class RequestAdmin(admin.ModelAdmin):
