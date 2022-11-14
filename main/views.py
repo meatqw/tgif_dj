@@ -153,7 +153,7 @@ def get_wallets(request):
     if request.method == 'POST':
         props = request.POST['props']
 
-        wallet = Wallets(props=props, user=request.user)
+        wallet = Wallets(props=props, user=request.user, status=True)
         wallet.save()
 
     else:
