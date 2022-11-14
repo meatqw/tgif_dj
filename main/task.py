@@ -1,7 +1,7 @@
 # Task to calculate the lifetime of requests and delete or update them
 from mysql.connector import connect, Error
 
-MINUS_NUM = 20
+MINUS_NUM = 60
 
 def counter(cursor):
         
