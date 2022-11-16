@@ -85,9 +85,9 @@ class Status(models.Model):
 class Request(models.Model):
     '''Request model'''
     amount = models.CharField('Сумма', max_length=50)
-    send = models.CharField('Отправляем', max_length=50)
-    get = models.CharField('Получаем', max_length=50)
-    deals = models.CharField('Сделки', max_length=50)
+    send = models.CharField('Отправляем', max_length=50, blank=True, null=True)
+    get = models.CharField('Получаем', max_length=50, blank=True, null=True)
+    deals = models.CharField('Сделки', max_length=50, blank=True, null=True)
     lifespan = models.IntegerField('Срок жизни')
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     status = models.ForeignKey(Status, on_delete=models.PROTECT, null=False, default="Новая")

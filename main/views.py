@@ -77,6 +77,7 @@ def news_page(request, id):
 @login_required
 def req(request):
     """REQUESTS page"""
+    status_new = Status.objects.filter(status_name='Новая').first()
     if request.method == 'POST':
         status = Status.objects.filter(status_name='Активная').first()
         print(status)
@@ -89,7 +90,7 @@ def req(request):
 
         return redirect('req')
 
-    req = Request.objects.filter(user=None).all()
+    req = Request.objects.filter(user=request.user, status=status_new.id).all()
     return render(request, 'main/request.html', {'req': req, 'escrow': ger_escrow(request.user.id), 'main': MainInfo.objects.all()[0]})
 
 
