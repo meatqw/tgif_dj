@@ -86,8 +86,13 @@ def req(request):
         user = request.user
         status = status.id
         id = request.POST['id']
-        Request.objects.filter(id=id).update(
-            user=user, status=status, wallets=wallets)
+        request_ = Request.objects.filter(id=id)
+        request_.update(user=user, status=status, wallets=wallets)
+        
+        # update user escrow
+        user_ = User.objects.filter(id=user.id)
+        user_.update(escrow=int(user_.first().escrow)+int(request_.first().amount))
+        
 
         return redirect('req')
 
@@ -143,16 +148,28 @@ def switch_req_status(request):
         if status != 'del':
             status = Status.objects.filter(status_name=request.POST['status']).first()
             
-            User.objects.filter(id=request.user.id).update(
-                requests=request.user.requests + 1)
-            Request.objects.filter(id=id).update(status=status)
+            req_ = Request.objects.filter(id=id)
+            
+            user_ = User.objects.filter(id=request.user.id)
+            user_.update(requests=request.user.requests + 1, escrow=int(user_.first().escrow)-int(req_.first().amount))
+            
+            # update req
+            req_.update(status=status)
 
             send_tg(Tg.objects.all(), f'Пользователь {request.user.token}\nИзменил статус заявки {id} ✅')
             
             return redirect('index')
 
         else:
-            Request.objects.filter(id=id).delete()
+            
+            # req del
+            req_ = Request.objects.filter(id=id)
+            
+            # update user escrow
+            user_ = User.objects.filter(id=request.user.id)
+            user_.update(escrow=int(user_.first().escrow)-int(req_.first().amount))
+            
+            req_.delete()
 
         return JsonResponse({'status': status})
 

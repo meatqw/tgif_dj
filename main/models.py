@@ -22,10 +22,10 @@ class User(models.Model):
     '''User model'''
     token = models.CharField('Токен', max_length=50)
     power = models.BooleanField(default=False)
-    requests = models.IntegerField('Заявки')
-    escrow = models.IntegerField('Эскроу')
-    balance = models.IntegerField('Баланс')
-    received = models.IntegerField('Получено')
+    requests = models.IntegerField('Заявки', default=1)
+    escrow = models.IntegerField('Эскроу', default=0)
+    balance = models.IntegerField('Баланс',  default=0)
+    received = models.IntegerField('Получено',default=0)
     date_joined = models.DateTimeField(
         'Дата создания', auto_now_add=True, blank=True)
     last_login = models.DateTimeField(

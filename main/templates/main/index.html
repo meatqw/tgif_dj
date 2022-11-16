@@ -192,18 +192,26 @@
 </script>
 
 <script>
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   function reqStatusSwitch(id) {
     // successfully and refusal
       request('Завершенная', id, '/switchStatus')
       document.getElementById(id).remove()
-      window.location.reload(true);
+
+      sleep(1000);
+      window.location.reload();
 
   }
   
   function reqDelSwitch(id) {
     request('del', id, '/switchStatus')
     document.getElementById(id).remove()
-    window.location.reload(true);
+
+    sleep(1000);
+    window.location.reload();
   }
 
 </script>
