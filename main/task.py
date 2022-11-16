@@ -4,14 +4,13 @@ from mysql.connector import connect, Error
 MINUS_NUM = 60
 
 def counter(cursor):
-        
     cursor.execute('SELECT * FROM main_request')
     result = cursor.fetchall()
     print(result)
     for req in result:
         new_req = req[5] - MINUS_NUM
         
-        if new_req <= 0 and req[-1] == None:
+        if new_req <= 0 and req[-2] == 1:
             cursor.execute(f'DELETE FROM main_request WHERE id = {req[0]}')
         else:
             cursor.execute(f'UPDATE main_request SET lifespan = {new_req} WHERE id = {req[0]}')
