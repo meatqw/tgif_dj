@@ -21,12 +21,13 @@
             </tr>
 
             {% for item in req %}
-            <tr>
+            <tr id="req_{{item.id}}">
               <td>{{ forloop.counter }}</td>
               <td>{{ item.amount }}</td>
               <td class='lifespan'>{{ item.lifespan }}</td>
               <td>
-                <a class="table__get js-popup--link" onclick='document.getElementById("active").value={{item.id}}' href="#request-pop-up"
+                <a class="table__get js-popup--link" onclick='document.getElementById("active").value={{item.id}};
+                document.getElementById("active_amount").value={{item.amount}}' href="#request-pop-up"
                   >Принять</a
                 >
               </td>

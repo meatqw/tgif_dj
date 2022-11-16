@@ -10,7 +10,9 @@
           <form>
             {% csrf_token %}
             <div class="request-pop-up__input-wrap">
-              <input id='active' style='display: none'>
+              <input id="active" style="display: none" />
+              <input id="active_amount" style="display: none" />
+
               <input
                 class="request-pop-up__input"
                 type="text"
@@ -34,7 +36,7 @@
               </caption>
               <tbody id="wallets"></tbody>
             </table>
-            <button class="request-pop-up__btn" id="btnOk">
+            <button class="request-pop-up__btn popup--close" id="btnOk">
               Принять
             </button>
           </div>
@@ -112,7 +114,8 @@
         wallet_dict.push(box[i].id);
       }
     }
-    data = { wallets: wallet_dict, id: document.getElementById('active').value};
+    var id = document.getElementById('active').value
+    data = { wallets: wallet_dict, id: id};
     const response = fetch("/req", {
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
@@ -120,8 +123,11 @@
       },
       method: "POST",
       body: new URLSearchParams(data),
-    }); 
-    location.reload()
+    });
+
+    document.getElementById(`req_${id}`).remove()
+    
+    document.getElementById('escrow').innerHTML = Number(document.getElementById('active_amount').value) + Number(document.getElementById('escrow').innerHTML.replace('<span>RUB</span>', '')) + ` <span>RUB</span>`;
 
   });
 </script>

@@ -167,8 +167,8 @@
 <script>
   // push active btn
 
-    function request(status, id, url) {
-      const response = fetch(url, {
+    async function request(status, id, url) {
+      const response = await fetch(url, {
         headers: {
           "Content-type": "application/x-www-form-urlencoded",
           "X-CSRFTOKEN": getCookie("csrftoken"),
@@ -196,21 +196,19 @@
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  function reqStatusSwitch(id) {
+  async function reqStatusSwitch(id) {
     // successfully and refusal
-      request('Завершенная', id, '/switchStatus')
+      await request('Завершенная', id, '/switchStatus')
       document.getElementById(id).remove()
 
-      sleep(1000);
       window.location.reload();
 
   }
   
-  function reqDelSwitch(id) {
-    request('del', id, '/switchStatus')
+  async function reqDelSwitch(id) {
+    await request('del', id, '/switchStatus')
     document.getElementById(id).remove()
 
-    sleep(1000);
     window.location.reload();
   }
 
