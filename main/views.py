@@ -21,9 +21,15 @@ def index(request):
     closed = [i for i in req if str(i.status) == 'Завершенная']
     in_check = [i for i in req if str(i.status) == 'На проверке']
     all = [i for i in req if str(i.status) != 'Новая']
+    
+    main = MainInfo.objects.all()
+    if len(main) > 0:
+        main = MainInfo.objects.all()[0]
+    else:
+        main = None
 
     return render(request, 'main/index.html', {'in_active': in_active, 'closed': closed, 'in_check': in_check, 'all': all,
-     'escrow': ger_escrow(request.user.id), 'main': MainInfo.objects.all()[0]})
+     'escrow': ger_escrow(request.user.id), 'main': main})
 
 
 def entry(request):
@@ -47,6 +53,12 @@ def entry(request):
 def faq(request):
     """FAQ page"""
     faq = Faq.objects.all()
+    
+    main = MainInfo.objects.all()
+    if len(main) > 0:
+        main = MainInfo.objects.all()[0]
+    else:
+        main = None
 
     if request.method == 'POST':
         email = request.POST['email']
@@ -57,22 +69,36 @@ def faq(request):
         question.save()
 
         return redirect('faq')
+    
+    
 
-    return render(request, 'main/faq.html', {'faq': faq, 'escrow': ger_escrow(request.user.id), 'main': MainInfo.objects.all()[0]})
+    return render(request, 'main/faq.html', {'faq': faq, 'escrow': ger_escrow(request.user.id), 'main': main})
 
 
 @login_required
 def news(request):
     """NEWS page"""
     news = News.objects.all()
-    return render(request, 'main/news.html', {'news': news, 'escrow': ger_escrow(request.user.id), 'main': MainInfo.objects.all()[0]})
+    
+    main = MainInfo.objects.all()
+    if len(main) > 0:
+        main = MainInfo.objects.all()[0]
+    else:
+        main = None
+    return render(request, 'main/news.html', {'news': news, 'escrow': ger_escrow(request.user.id), 'main': main})
 
 
 @login_required
 def news_page(request, id):
     """specific news page"""
     news = News.objects.filter(id=id).first()
-    return render(request, 'main/news-page.html', {'news': news, 'escrow': ger_escrow(request.user.id), 'main': MainInfo.objects.all()[0]})
+    
+    main = MainInfo.objects.all()
+    if len(main) > 0:
+        main = MainInfo.objects.all()[0]
+    else:
+        main = None
+    return render(request, 'main/news-page.html', {'news': news, 'escrow': ger_escrow(request.user.id), 'main': main})
 
 
 @login_required
@@ -96,16 +122,31 @@ def req(request):
 
         return redirect('req')
 
-    req = Request.objects.filter(user=request.user, status=status_new.id).all()
-    return render(request, 'main/request.html', {'req': req, 'escrow': ger_escrow(request.user.id), 'main': MainInfo.objects.all()[0]})
+    
+    req = Request.objects.filter(status=status_new.id).all()
+    req = [i for i in req if i.user == request.user or i.user == None]
+    
+    main = MainInfo.objects.all()
+    if len(main) > 0:
+        main = MainInfo.objects.all()[0]
+    else:
+        main = None
+        
+    return render(request, 'main/request.html', {'req': req, 'escrow': ger_escrow(request.user.id), 'main': main})
 
 
 @login_required
 def wallets(request):
     """WALLETS page"""
+    
+    main = MainInfo.objects.all()
+    if len(main) > 0:
+        main = MainInfo.objects.all()[0]
+    else:
+        main = None
 
     wallets = Wallets.objects.filter(user=request.user.id).all()
-    return render(request, 'main/wallets.html', {'wallets': wallets, 'escrow': ger_escrow(request.user.id), 'main': MainInfo.objects.all()[0]})
+    return render(request, 'main/wallets.html', {'wallets': wallets, 'escrow': ger_escrow(request.user.id), 'main': main})
 
 
 # --------------------------------
