@@ -70,8 +70,8 @@
               <td>{{ item.get }}</td>
               <td>{{ item.deals }}</td>
               <td>
-                <button class="table__get" onclick="reqStatusSwitch({{item.id}})">Успешно</button>
-                <button class="table__close" onclick="reqDelSwitch({{item.id}})">Отказаться</button>
+                <button class="table__get"{% if user.power == False %}style="background-color: #4c4e53;;"{%endif %} {% if user.power == False %}disabled{%endif %} onclick="reqStatusSwitch({{item.id}})">Успешно</button>
+                <button class="table__close" {% if user.power == False %}style="background-color: #4c4e53;;"{%endif %} {% if user.power == False %}disabled{%endif %} onclick="reqDelSwitch({{item.id}})">Отказаться</button>
               </td>
             </tr>
            {% endfor %}
@@ -179,13 +179,16 @@
   }
 
   var activeBtn = document.getElementById('activeBtn')
-  activeBtn.addEventListener("click", function (e) {
+  activeBtn.addEventListener("click", async function (e) {
     if (activeBtn.className == 'table__btn-sw _active' ) {
       activeBtn.className = 'table__btn-sw'
-      request(false, 0, '/switchPower');
+      await request(false, 0, '/switchPower');
+      window.location.reload();
+
     } else {
       activeBtn.className = 'table__btn-sw _active'
-      request(true, 0, '/switchPower');
+      await request(true, 0, '/switchPower');
+      window.location.reload();
     }
   });
 

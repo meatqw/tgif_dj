@@ -26,6 +26,7 @@ class User(models.Model):
     escrow = models.IntegerField('Эскроу', default=0)
     balance = models.IntegerField('Баланс',  default=0)
     received = models.IntegerField('Получено',default=0)
+    account_number = models.CharField('Номер счета', max_length=200)
     date_joined = models.DateTimeField(
         'Дата создания', auto_now_add=True, blank=True)
     last_login = models.DateTimeField(
@@ -144,26 +145,10 @@ class Tg(models.Model):
         verbose_name = 'TG ID'
         verbose_name_plural = 'TG IDs'
 
-class MainInfo(models.Model):
-    '''MainInfo model'''
-    account_number = models.CharField('Номер счета', max_length=200)
-    datetime = models.DateTimeField(auto_now_add=True, blank=True)
-
-    def __str__(self):
-        return self.account_number
-    
-    class Meta:
-        verbose_name = 'Номер счета'
-        verbose_name_plural = 'Номер счета'
-
 
 class RequestAdmin(admin.ModelAdmin):
     '''Show all fields in admin'''
     list_display = [field.name for field in Request._meta.fields]
-
-class MainInfoAdmin(admin.ModelAdmin):
-    '''Show all fields in admin'''
-    list_display = [field.name for field in MainInfo._meta.fields]
 
 class FaqAdmin(admin.ModelAdmin):
     '''Show all fields in admin'''
