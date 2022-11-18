@@ -209,7 +209,7 @@
   }
   
   async function reqDelSwitch(id) {
-    await request('del', id, '/switchStatus')
+    await request('Отказ', id, '/switchStatus')
     document.getElementById(id).remove()
 
     window.location.reload();

@@ -149,10 +149,10 @@ def switch_req_status(request):
 
     if request.method == 'POST':
 
-        status = request.POST['status']
         id = request.POST['id']
+        status = Status.objects.filter(status_name=request.POST['status']).first()
         
-        if status != 'del':
+        if request.POST['status'] != 'Отказ':
             status = Status.objects.filter(status_name=request.POST['status']).first()
             
             req_ = Request.objects.filter(id=id)
@@ -176,7 +176,7 @@ def switch_req_status(request):
             user_ = User.objects.filter(id=request.user.id)
             user_.update(escrow=int(user_.first().escrow)-int(req_.first().amount))
             
-            req_.delete()
+            req_.update(status=status)
 
         return JsonResponse({'status': status})
 
