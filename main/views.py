@@ -20,7 +20,7 @@ def index(request):
     in_active = [i for i in req if str(i.status) == 'Активная']
     closed = [i for i in req if str(i.status) == 'Завершенная']
     in_check = [i for i in req if str(i.status) == 'На проверке']
-    all = [i for i in req if str(i.status) != 'Новая']
+    all = [i for i in req if str(i.status) not in ['Новая', 'Отказ']]
 
     return render(request, 'main/index.html', {'in_active': in_active, 'closed': closed, 'in_check': in_check, 'all': all,
      'escrow': ger_escrow(request.user.id)})
