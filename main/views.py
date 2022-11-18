@@ -110,12 +110,6 @@ def req(request):
 @login_required
 def wallets(request):
     """WALLETS page"""
-    
-    main = MainInfo.objects.all()
-    if len(main) > 0:
-        main = MainInfo.objects.all()[0]
-    else:
-        main = None
 
     wallets = Wallets.objects.filter(user=request.user.id).all()
     return render(request, 'main/wallets.html', {'wallets': wallets, 'escrow': ger_escrow(request.user.id)})
