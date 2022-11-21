@@ -23,11 +23,11 @@
             {% for item in req %}
             <tr id="req_{{item.id}}">
               <td>{{ forloop.counter }}</td>
-              <td>{{ item.amount }}</td>
+              <td {% if item.amount|add:"0" > user.balance%} style='color: red;'{%endif%}>{{ item.amount }}</td>
               <td class='lifespan'>{{ item.lifespan }}</td>
               <td>
-                <a class="table__get js-popup--link" onclick='document.getElementById("active").value={{item.id}};
-                document.getElementById("active_amount").value={{item.amount}}' href="#request-pop-up"
+                <a class="table__get js-popup--link" {% if item.amount|add:"0" > user.balance%}style="background-color: #4c4e53;" href="#"{% elif item.amount|add:"0" <= user.balance %}href="#request-pop-up"{% endif %} onclick='document.getElementById("active").value={{item.id}};
+                document.getElementById("active_amount").value={{item.amount}}' 
                   >Принять</a
                 >
               </td>

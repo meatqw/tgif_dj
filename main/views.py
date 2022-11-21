@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import News, Request, User, Wallets, Question, Faq, Tg, Status
+from .models import News, Request, User, Wallets, Question, Faq, Tg, Status, ExchangeRates
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -23,7 +23,7 @@ def index(request):
     all = [i for i in req if str(i.status) not in ['Новая', 'Отказ']]
 
     return render(request, 'main/index.html', {'in_active': in_active, 'closed': closed, 'in_check': in_check, 'all': all,
-     'escrow': ger_escrow(request.user.id)})
+     'escrow': ger_escrow(request.user.id), 'rates': ExchangeRates.objects.all()})
 
 
 def entry(request):
@@ -60,7 +60,7 @@ def faq(request):
     
     
 
-    return render(request, 'main/faq.html', {'faq': faq, 'escrow': ger_escrow(request.user.id)})
+    return render(request, 'main/faq.html', {'faq': faq, 'escrow': ger_escrow(request.user.id), 'rates': ExchangeRates.objects.all()})
 
 
 @login_required
@@ -68,7 +68,7 @@ def news(request):
     """NEWS page"""
     news = News.objects.all()
     
-    return render(request, 'main/news.html', {'news': news, 'escrow': ger_escrow(request.user.id)})
+    return render(request, 'main/news.html', {'news': news, 'escrow': ger_escrow(request.user.id), 'rates': ExchangeRates.objects.all()})
 
 
 @login_required
@@ -76,7 +76,7 @@ def news_page(request, id):
     """specific news page"""
     news = News.objects.filter(id=id).first()
     
-    return render(request, 'main/news-page.html', {'news': news, 'escrow': ger_escrow(request.user.id)})
+    return render(request, 'main/news-page.html', {'news': news, 'escrow': ger_escrow(request.user.id), 'rates': ExchangeRates.objects.all()})
 
 
 @login_required
@@ -104,7 +104,7 @@ def req(request):
     req = Request.objects.filter(status=status_new.id).all()
     req = [i for i in req if i.user == request.user or i.user == None]
         
-    return render(request, 'main/request.html', {'req': req, 'escrow': ger_escrow(request.user.id)})
+    return render(request, 'main/request.html', {'req': req, 'escrow': ger_escrow(request.user.id), 'rates': ExchangeRates.objects.all()})
 
 
 @login_required
@@ -112,7 +112,7 @@ def wallets(request):
     """WALLETS page"""
 
     wallets = Wallets.objects.filter(user=request.user.id).all()
-    return render(request, 'main/wallets.html', {'wallets': wallets, 'escrow': ger_escrow(request.user.id)})
+    return render(request, 'main/wallets.html', {'wallets': wallets, 'escrow': ger_escrow(request.user.id), 'rates': ExchangeRates.objects.all()})
 
 
 # --------------------------------
@@ -157,13 +157,18 @@ def switch_req_status(request):
             
             req_ = Request.objects.filter(id=id)
             
-            user_ = User.objects.filter(id=request.user.id)
-            user_.update(requests=request.user.requests + 1, escrow=int(user_.first().escrow)-int(req_.first().amount))
+            if req_.first().get != None:
+                user_ = User.objects.filter(id=request.user.id)
+                user_.update(requests=request.user.requests + 1,
+                            escrow=int(user_.first().escrow)-int(req_.first().amount),
+                            balance=int(user_.first().balance)-int(req_.first().amount),
+                            received=int(user_.first().received) + int(req_.first().get))
             
-            # update req
-            req_.update(status=status)
+            
+                # update req
+                req_.update(status=status)
 
-            send_tg(Tg.objects.all(), f'Пользователь {request.user.token}\nИзменил статус заявки {id} ✅')
+                send_tg(Tg.objects.all(), f'Пользователь {request.user.token}\nИзменил статус заявки {id} ✅')
             
             return redirect('index')
 

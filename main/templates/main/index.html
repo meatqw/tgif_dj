@@ -70,8 +70,8 @@
               <td>{{ item.get }}</td>
               <td>{{ item.deals }}</td>
               <td>
-                <button class="table__get"{% if user.power == False %}style="background-color: #4c4e53;;"{%endif %} {% if user.power == False %}disabled{%endif %} onclick="reqStatusSwitch({{item.id}})">Успешно</button>
-                <button class="table__close" {% if user.power == False %}style="background-color: #4c4e53;;"{%endif %} {% if user.power == False %}disabled{%endif %} onclick="reqDelSwitch({{item.id}})">Отказаться</button>
+                <button class="table__get"{% if user.power == False %}style="background-color: #4c4e53;"{%endif %} {% if user.power == False %}disabled{%endif %} onclick="reqStatusSwitch({{item.id}})">Успешно</button>
+                <button class="table__close" {% if user.power == False %}style="background-color: #4c4e53;"{%endif %} {% if user.power == False %}disabled{%endif %} onclick="reqDelSwitch({{item.id}})">Отказаться</button>
               </td>
             </tr>
            {% endfor %}

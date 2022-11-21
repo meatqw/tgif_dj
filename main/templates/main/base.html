@@ -12,11 +12,18 @@
 
   <body class="body">
     <main class="main">
+      <div style='position: absolute; right: 0.5%; top: 0.5%; font-size: 80%;'>
+        {% for i in rates %}
+        <span>{{i.currency}}: {{i.value}} {{i.sign}} |</span>
+        {% endfor %}
+      </div>
       <div class="main__inner">
         <div class="menu">
           <nav class="menu__inner">
             <div class="menu__top">
+              
               <div class="menu__top-left">
+                
                 <button
                   class="burger content__burger _show-1024 js-menu-toggle"
                 >
@@ -27,7 +34,7 @@
                   />
                   <span class="sr-only"> Открыть меню </span>
                 </button>
-
+                
                 <a class="menu__logo logo" href="/">
                   <img
                     class="logo img"
@@ -36,8 +43,9 @@
                   />
                 </a>
               </div>
-
+              
               <div class="content__exit-wrap _show-1024">
+                
                 <button class="content__exit" type="button" onclick="window.location.replace('/logout');">
                   <img
                     class="content__exit-img"
@@ -47,6 +55,7 @@
                     alt="exit"
                   />
                   <span class="sr-only"> Выйти из личного кабинета </span>
+                  
                 </button>
               </div>
             </div>
@@ -113,6 +122,7 @@
         </div>
 
         <div class="content">
+          
           <div class="content__top">
             <div class="content__left">
               <button class="burger content__burger _show-1024 js-menu-toggle">
@@ -131,7 +141,7 @@
                 />
               </a>
             </div>
-
+            
             <button class="content__exit" type="button" onclick="window.location.replace('/logout');">
               <img
                 class="content__exit-img"
@@ -240,10 +250,6 @@
         </div>
         <div class="footer__bottom">
           <p class="footer__info">
-            Время работы, адрес или другая полезная информация. Время работы,
-            адрес или другая полезная информация
-          </p>
-          <p class="footer__copyright">@ Все права защищены</p>
         </div>
       </div>
     </footer>
