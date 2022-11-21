@@ -97,7 +97,7 @@ def req(request):
         user_ = User.objects.filter(id=user.id)
         user_.update(escrow=int(user_.first().escrow)+int(request_.first().amount))
         
-        send_tg(Tg.objects.all(), f'❗ Пользователь {request.user.token}\nПринял заявку {id}\nСсылка: {DOMEN}/admin/main/request/{id}')
+        send_tg(Tg.objects.all(), f'Пользователь {request.user.token}❗\nПринял заявку {id}\nСсылка: {DOMEN}/admin/main/request/{id}')
 
         return redirect('req')
 
