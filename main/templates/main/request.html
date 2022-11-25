@@ -16,7 +16,7 @@
             <tr>
               <th>Номер</th>
               <th>Сумма</th>
-              <th>Истекает через</th>
+              <th>Реквизиты</th>
               <th>Действие</th>
             </tr>
 
@@ -24,7 +24,7 @@
             <tr id="req_{{item.id}}">
               <td>{{ forloop.counter }}</td>
               <td {% if item.amount|add:"0" > user.balance%} style='color: red;'{%endif%}>{{ item.amount }}</td>
-              <td class='lifespan'>{{ item.lifespan }}</td>
+              <td class='lifespan'>{{ item.requisites }}</td>
               <td>
                 <a class="table__get js-popup--link" {% if item.amount|add:"0" > user.balance%}style="background-color: #4c4e53;" href="#"{% elif item.amount|add:"0" <= user.balance %}href="#request-pop-up"{% endif %} onclick='document.getElementById("active").value={{item.id}};
                 document.getElementById("active_amount").value={{item.amount}}' 
@@ -39,7 +39,7 @@
     </div>
   </section>
 </div>
-<script>
+{% comment %} <script>
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -60,6 +60,6 @@
     
   }
   timer()
-</script>
+</script> {% endcomment %}
 {% include 'main/popup.html' %}
 {% endblock %}

@@ -95,7 +95,7 @@ def req(request):
         
         # update user escrow
         user_ = User.objects.filter(id=user.id)
-        user_.update(escrow=int(user_.first().escrow)+int(request_.first().amount))
+        user_.update(escrow=int(user_.first().escrow)+int(request_.first().amount), balance=int(user_.first().balance)-int(request_.first().amount))
         
         send_tg(Tg.objects.all(), f'Пользователь {request.user.token}❗\nПринял заявку {id}\nСсылка: {DOMEN}/admin/main/request/{id}')
 
@@ -162,7 +162,6 @@ def switch_req_status(request):
                 user_ = User.objects.filter(id=request.user.id)
                 user_.update(requests=request.user.requests + 1,
                             escrow=int(user_.first().escrow)-int(req_.first().amount),
-                            balance=int(user_.first().balance)-int(req_.first().amount),
                             received=int(user_.first().received) + int(req_.first().get))
             
             
@@ -180,7 +179,8 @@ def switch_req_status(request):
             
             # update user escrow
             user_ = User.objects.filter(id=request.user.id)
-            user_.update(escrow=int(user_.first().escrow)-int(req_.first().amount))
+            user_.update(escrow=int(user_.first().escrow)-int(req_.first().amount),
+                         balance=int(user_.first().balance)+int(req_.first().amount))
             
             req_.update(status=status)
 

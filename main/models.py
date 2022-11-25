@@ -89,11 +89,11 @@ class Request(models.Model):
     send = models.CharField('Отправляем', max_length=50, blank=True, null=True)
     get = models.CharField('Получаем', max_length=50, blank=True, null=True)
     deals = models.CharField('Сделки', max_length=50, blank=True, null=True)
-    lifespan = models.IntegerField('Срок жизни')
+    requisites = models.CharField('Реквизиты', max_length=300, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     status = models.ForeignKey(Status, on_delete=models.PROTECT, null=False, default="Новая")
     # condition = models.BooleanField('condition', default=False)
-    wallets = models.JSONField('Реквизиты', default='{}')
+    wallets = models.JSONField('Реквизиты пользователя', default='{}')
     datetime = models.DateTimeField(auto_now_add=True, blank=True)
     
 

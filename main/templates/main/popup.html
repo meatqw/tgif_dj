@@ -106,7 +106,7 @@
 
 <script>
   var btnOk = document.getElementById("btnOk");
-  btnOk.addEventListener("click", function (e) {
+  btnOk.addEventListener("click", async function (e) {
     box = document.getElementsByClassName("table__checkbox");
     var wallet_dict = [];
     for (var i = 0; i < box.length; i++) {
@@ -116,7 +116,7 @@
     }
     var id = document.getElementById('active').value
     data = { wallets: wallet_dict, id: id};
-    const response = fetch("/req", {
+    const response = await fetch("/req", {
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
         "X-CSRFTOKEN": getCookie("csrftoken"),
@@ -126,8 +126,9 @@
     });
 
     document.getElementById(`req_${id}`).remove()
+    window.location.reload();
     
-    document.getElementById('escrow').innerHTML = Number(document.getElementById('active_amount').value) + Number(document.getElementById('escrow').innerHTML.replace('<span>RUB</span>', '')) + ` <span>RUB</span>`;
-
+    //document.getElementById('escrow').innerHTML = Number(document.getElementById('active_amount').value) + Number(document.getElementById('escrow').innerHTML.replace('<span>RUB</span>', '')) + ` <span>RUB</span>`;
+    //document.getElementById('balance').innerHTML = Number(document.getElementById('balance').innerHTML) - Number(document.getElementById('active_amount').value);
   });
 </script>
